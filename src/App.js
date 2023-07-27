@@ -1,25 +1,16 @@
+import React from "react";
+import PropTypes from "prop-types";
 import logo from "./logo.svg";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-// import Button from "./Button.js";
+import Button from "./components/Button";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Button/>
-        {/* <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React */}
-        {/* </a> */}
+        <Button varName="I am a button"></Button>
+        <Button varName="Button #2"></Button>
       </header>
     </div>
   );

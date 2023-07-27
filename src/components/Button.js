@@ -1,9 +1,16 @@
-import "./App.js";
-import { Route, Routes } from "react-router-dom";
+import React from "react";
+import PropTypes from "prop-types";
 
-function Button() {
-  return <button type="button">{"This is a button"}</button>;
+function Button(props) {
+  const someFunc = () => {
+    console.log("You clicked me!");
+  };
 
+  return (
+    <button onClick={() => someFunc()} type="button">
+      {props.varName}
+    </button>
+  );
 }
 
 export default Button;
