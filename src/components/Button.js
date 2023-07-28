@@ -1,13 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 function Button(props) {
-  const someFunc = () => {
+  const clickButton = () => {
     console.log("You clicked me!");
   };
 
   return (
-    <button onClick={() => someFunc()} type="button">
+    <button onClick={() => clickButton()} type="button">
       {props.varName}
     </button>
   );
