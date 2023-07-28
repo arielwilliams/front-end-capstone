@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Search from "./pages/Search";
 import Logout from "./pages/Logout";
 import Button from "./components/Button";
+import Navigation from "./components/Navigation";
 
 // wrapped <Router> around <div>
 // created link tags for buttonswith path and name of each page (Home, Dashboard, Search, Logout)
@@ -18,7 +19,8 @@ function App() {
     <Router>
       <div className="App">
         <header className="App-header">
-          <nav>
+          <Navigation />
+          {/* <nav>
             <ul>
               <li>
                 <Link to="/home">Home</Link>
@@ -33,7 +35,7 @@ function App() {
                 <Link to="/logout">Logout</Link>
               </li>
             </ul>
-          </nav>
+          </nav> */}
         </header>
         <main>
           <Routes>
