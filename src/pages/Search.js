@@ -8,7 +8,12 @@ import React from "react";
 // UNLESS WE WANT SEARCH SUGGESTIONS (that would be on key down... which would probs be more work)
 
 const Search = () => {
-  return <h1>Welcome to the Search Page</h1>;
+  return (
+    <>
+      <h1>Welcome to the Search Page</h1>
+      <input type="search" />
+    </>
+  );
 };
 
 export default Search;
