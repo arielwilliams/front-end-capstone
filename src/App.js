@@ -17,7 +17,7 @@ import Navigation from "./components/Navigation";
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="App py-4">
         <header className="App-header">
           <Navigation />
         </header>
