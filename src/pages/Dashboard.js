@@ -1,7 +1,13 @@
 import React from "react";
 
 const Dashboard = () => {
-  return <h1>Welcome to the Dashboard Page</h1>;
+  const data = {
+    user: {
+      firstName: "Ariel",
+    },
+  };
+
+  return <h1>Hello, {data.user.firstName}</h1>;
 };
 
 export default Dashboard;
