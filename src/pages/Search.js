@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../components/Button";
 
 // notes: we will need an input field wrapped in form field and an event listener for on form submit
 // when user clicks the submit button then hit the yelp API once for those suggestions
@@ -12,6 +13,7 @@ const Search = () => {
     <>
       <h1>Welcome to the Search Page</h1>
       <input type="search" />
+      <button>Submit</button>
     </>
   );
 };
