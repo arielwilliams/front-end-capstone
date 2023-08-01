@@ -28,8 +28,10 @@ function App() {
     <div>
       <Login userCallback={userCallback}/>
       <BrowserRouter>
-        <div className="App">
-          <Navigation />
+        <div className="App py-4">
+          <header className="App-header">
+            <Navigation />
+          </header>
           <main>
             <Routes>
               <Route path="/home" element={<Home />} />
@@ -42,7 +44,6 @@ function App() {
           <Button varName="Button #2"></Button>
         </div>
       </BrowserRouter>
-
     </div>
   );
 }
