@@ -39,7 +39,7 @@ const Login = ({userCallback}) => {
         <div className="App">
             <div id="signInDiv"></div>
             { Object.keys(user).length !== 0 &&
-            <button onClick={ (e) => handleSignOut(e)}>Sign Out</button>
+            <button onClick={ (e) => handleSignOut(e)}>Logout</button>
             }
         
             { Object.keys(user).length !== 0 &&
