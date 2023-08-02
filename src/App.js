@@ -22,7 +22,7 @@ function App() {
     setUser(userInfo);
   }
 
-  console.log(user)
+  // console.log(user)
 
   return (
     <div>
@@ -30,7 +30,7 @@ function App() {
       <BrowserRouter>
         <div className="App py-4">
           <header className="App-header">
-            <Navigation />
+            <Navigation user={user} />
           </header>
           <main>
             <Routes>
