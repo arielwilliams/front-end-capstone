@@ -4,7 +4,7 @@ const aboutUsData = [
     name: "Ariel Williams",
     blurb: "I like food",
     github: "https://github.com/arielwilliams",
-    linkedin: "www.linkedin.com/in/ariel-w-827228ab",
+    linkedin: "https://linkedin.com/in/ariel-w-827228ab",
     image: "/logo512.png",
   },
   {
