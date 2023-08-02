@@ -11,7 +11,9 @@ import Button from "../components/Button";
 const Search = () => {
   return (
     <>
-      <h1>Welcome to the Search Page</h1>
+      <h1 className="text-center font-semibold text-5xl m-6">
+        Welcome to the Search Page
+      </h1>
       <input type="search" />
       <button>Submit</button>
     </>
