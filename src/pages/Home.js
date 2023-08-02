@@ -4,7 +4,9 @@ import aboutUsData from "../data/about-us.js";
 const Home = () => {
   return (
     <>
-      <h1>Welcome to the Home Page</h1>
+      <h1 className="text-center font-semibold text-5xl m-6">
+        Welcome to the Home Page
+      </h1>
       <p>We like food</p>
       <ul>
         {aboutUsData.map((element) => (

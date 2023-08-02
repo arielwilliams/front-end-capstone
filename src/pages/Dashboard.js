@@ -7,7 +7,15 @@ const Dashboard = () => {
     },
   };
 
-  return <h1>Hello, {data.user.firstName}</h1>;
+  return (
+    <div>
+      <h1 className="text-center font-semibold text-5xl m-6">
+        {" "}
+        Welcome to Dashboard
+      </h1>
+      <h2>Hello, {data.user.firstName}</h2>
+    </div>
+  );
 };
 
 export default Dashboard;
