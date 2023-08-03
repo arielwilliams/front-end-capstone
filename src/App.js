@@ -15,18 +15,17 @@ import Login from "./pages/Login";
 // wrapped <Router> around <div>
 // created link tags for buttonswith path and name of each page (Home, Dashboard, Search, Logout)
 function App() {
-
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
 
   const userCallback = (userInfo) => {
     setUser(userInfo);
-  }
+  };
 
   // console.log(user)
 
   return (
     <div>
-      <Login userCallback={userCallback}/>
+      <Login userCallback={userCallback} />
       <BrowserRouter>
         <div className="App py-4">
           <header className="App-header">
@@ -40,8 +39,6 @@ function App() {
               <Route path="/logout" element={<Logout />} />
             </Routes>
           </main>
-          <Button varName="I am a button"></Button>
-          <Button varName="Button #2"></Button>
         </div>
       </BrowserRouter>
     </div>
