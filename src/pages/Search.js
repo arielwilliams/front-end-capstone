@@ -12,7 +12,19 @@ const Search = () => {
   const handleSearchFormSubmit = (event) => {
     event.preventDefault();
     console.log("Hello");
+    // console.log(process);
+    // fetchYelpData();
   };
+
+  // const fetchYelpData = () => {
+  //   fetch(YELP_API_KEY)
+  //     .get((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       handleSearchFormSubmit(data);
+  //     });
+  // };
 
   return (
     <>
