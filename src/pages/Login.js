@@ -44,7 +44,7 @@ const Login = ({ userCallback }) => {
 
       {Object.keys(user).length !== 0 && (
         <div className="font-bold">
-          <h3>Hello {user.name}!</h3>
+          <h3>Hello, {user.name}!</h3>
         </div>
       )}
     </div>
