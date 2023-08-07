@@ -1,20 +1,20 @@
 import React from "react";
 import Button from "../components/Button";
 
-// notes: we will need an input field wrapped in form field and an event listener for on form submit
-// when user clicks the submit button then hit the yelp API once for those suggestions
-// if user wants to add a restaurant to their list, it would immediately get added to their favorites list.
-// THEN, that restaurant will get saved to the BE database.
-
-// UNLESS WE WANT SEARCH SUGGESTIONS (that would be on key down... which would probs be more work)
-
 const Search = () => {
   const handleSearchFormSubmit = (event) => {
     event.preventDefault();
     console.log("Hello");
-    // console.log(process);
+    console.log(process.env.REACT_APP_YELP_API_KEY);
     // fetchYelpData();
   };
+
+  // make call with fetch syntax
+  // when you make api request you have to point to the service and the service
+  // will ask do you have a key and then you provide the key then the service
+  // approves access.
+  // Then you need to take what's in the input field and ask the service to
+  // search for that info
 
   // const fetchYelpData = () => {
   //   fetch(YELP_API_KEY)
