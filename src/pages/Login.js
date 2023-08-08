@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ userCallback }) => {
   const [user, setUser] = useState({});
+
+  const navigate = useNavigate()
 
   const handleCallbackResponse = (response) => {
     console.log("Encoded JWT ID token: " + response.credential);
@@ -10,12 +13,15 @@ const Login = ({ userCallback }) => {
     setUser(userObject);
     userCallback(userObject);
     document.getElementById("signInDiv").hidden = true;
+    navigate("/dashboard")
+    
   };
 
   const handleSignOut = (event) => {
     setUser({});
     userCallback({});
     document.getElementById("signInDiv").hidden = false;
+    navigate("/home")
   };
 
   useEffect(() => {
@@ -38,9 +44,11 @@ const Login = ({ userCallback }) => {
   return (
     <div className="App">
       <div id="signInDiv"></div>
-      {Object.keys(user).length !== 0 && (
-        <button onClick={(e) => handleSignOut(e)}>Logout</button>
-      )}
+      <>
+        {Object.keys(user).length !== 0 && (
+          <button onClick={(e) => handleSignOut(e)}>Logout</button>
+        )}
+      </>
 
       {Object.keys(user).length !== 0 && (
         <div className="font-bold">

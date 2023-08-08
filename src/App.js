@@ -23,8 +23,8 @@ function App() {
 
   return (
     <div>
-      <Login userCallback={userCallback} />
       <BrowserRouter>
+        <Login userCallback={userCallback} />
         <div className="App py-4">
           <header className="App-header">
             <Navigation user={user} />
