@@ -91,6 +91,7 @@ const Search = () => {
             sanitizeInput(business.name).includes(sanitizeInput(input))
           )
         );
+        setInput("");
       });
   };
 
