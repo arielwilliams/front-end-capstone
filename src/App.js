@@ -31,6 +31,7 @@ function App() {
           </header>
           <main>
             <Routes>
+              <Route index element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard user={user}/>} />
               <Route path="/search" element={<Search />} />
