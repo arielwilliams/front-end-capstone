@@ -80,7 +80,10 @@ const Search = () => {
 
     await fetch(apiURL, options)
       .then((response) => response.json())
-      .then((response) => setSearchResult(response.businesses[0]));
+      .then((response) => {
+        setSearchResult(response.businesses[0]);
+        setInput("");
+      });
   };
 
   return (
