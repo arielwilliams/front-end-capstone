@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
 const Navigation = (props) => {
   if (Object.keys(props.user).length > 0) {
     return (
@@ -25,12 +24,12 @@ const Navigation = (props) => {
           >
             Search
           </Link>
-          <Link
+          {/* <Link
             to="/logout"
             className="text-white hover:bg-blue-700 px-4 py-2 rounded"
           >
             Logout
-          </Link>
+          </Link> */}
         </nav>
       </>
     );
@@ -48,7 +47,6 @@ const Navigation = (props) => {
       </>
     );
   }
-  
 };
 
 export default Navigation;
