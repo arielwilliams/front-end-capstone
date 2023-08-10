@@ -96,7 +96,7 @@ const Search = () => {
         Welcome to the Search Page
       </h1>
       <h2 className="font-semibold">
-        Please enter any restaurant or key terms into the search field below.
+        Please enter a restaurant into the search field below.
       </h2>
       <form onSubmit={(event) => handleSearchFormSubmit(event)}>
         <input
