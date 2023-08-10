@@ -14,8 +14,7 @@ const Login = ({ userCallback }) => {
     userCallback(userObject);
     document.getElementById("signInDiv").hidden = true;
     navigate("/dashboard")
-    // console.log("LOOK HERE")
-    // console.log(userObject)
+    console.log(userObject)
     
   };
 
