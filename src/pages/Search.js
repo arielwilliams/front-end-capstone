@@ -9,6 +9,18 @@ const Search = () => {
   const [userLocation, setUserLocation] = useState({});
   const [searchResults, setSearchResults] = useState([]);
 
+  // my thoughts: each result will need to have a heart next to it and
+  // should the like button associated with the search result be submitted
+  // as a form?
+  // created new useState to account for clicking like button next to a restaurant
+  const [likedResults, setLikedResults] = useState([]);
+
+  const handleLikeClick = (searchResult) => {
+    // setLikedResults((prevLikedResults) => [...prevLikedResults, index]);
+    // console.log(index);
+    postDataToFavList(searchResult);
+  };
+
   const yelpUrl = {
     proxy: "https://cors-anywhere.herokuapp.com/",
     api: "https://api.yelp.com/v3/businesses/search",
@@ -45,6 +57,20 @@ const Search = () => {
 
   const sanitizeInput = (input) => {
     return input.toLowerCase().trim();
+  };
+
+  const postDataToFavList = async (searchResult) => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(searchResult),
+    };
+
+    const response = await fetch(yelpUrl.backend, options);
+
+    return response.json();
   };
 
   ////// fetchData makes GET request to BE to grab response from yelp API ///////
@@ -115,9 +141,11 @@ const Search = () => {
         </button>
       </form>
       {searchResults.length > 0 &&
-        searchResults.map((searchResult) => {
+        searchResults.map((searchResult, index) => {
+          const isLiked = likedResults.includes(index);
+
           return (
-            <section className="pb-4">
+            <section className="pb-4" key={searchResult.id}>
               <h3 className="text-lg">{searchResult.name}</h3>
               <a href={"tel:" + searchResult.phone}>
                 {searchResult.display_phone}
@@ -137,7 +165,14 @@ const Search = () => {
                   </li>
                 </ul>
               </address>
-              {/* <button type="button">❤️</button> */}
+              <button
+                type="button"
+                onClick={() => handleLikeClick(searchResult)}
+                style={{ color: isLiked ? "red" : "black" }}
+                // disabled={isLiked}
+              >
+                ❤️
+              </button>
             </section>
           );
         })}
