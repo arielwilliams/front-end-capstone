@@ -1,4 +1,5 @@
 import React from "react";
+import RestaurantList from "../components/RestaurantList";
 
 const Dashboard = (props) => {
   if (Object.keys(props.user).length > 0) {
@@ -16,6 +17,7 @@ const Dashboard = (props) => {
         <h2 className="text-left font-bold text-2xl ml-6">
           {props.user.given_name}'s Restaurants
         </h2>
+        <RestaurantList listId={props.listId} />
       </div>
     );
   }
