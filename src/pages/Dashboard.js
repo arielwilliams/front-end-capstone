@@ -1,5 +1,7 @@
 import React from "react";
-import RestaurantList from "../components/RestaurantList";
+import { Route, Routes } from "react-router-dom";
+import AllLists from "../components/AllLists";
+import List from "../components/List";
 
 const Dashboard = (props) => {
   if (Object.keys(props.user).length > 0) {
@@ -15,9 +17,9 @@ const Dashboard = (props) => {
           add restaurants to your favorites list!
         </h2>
         <h2 className="text-left font-bold text-2xl ml-6">
-          {props.user.given_name}'s Restaurants
+          {props.user.given_name}'s Lists
         </h2>
-        <RestaurantList listId={props.listId} />
+        <AllLists lists={props.lists} />
       </div>
     );
   }
