@@ -16,6 +16,8 @@ const List = ({ list }) => {
                     throw new Error("Network response was not okay");
                 }
                 const data = await response.json();
+                // console.log("LOOK HERE")
+                // console.log("fetched data:", data);
                 setRestaurants(data);
                 } catch (error) {
                 console.error("Error fetching restaurants:", error);

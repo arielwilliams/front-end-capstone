@@ -9,9 +9,9 @@ const RestaurantCard = ({restaurant}) => {
             <h3>{restaurant.restaurantName}</h3>
             <p>Cuisine: {restaurant.cuisine}</p>
             {/* <p>Rating: {restaurant.rating}</p> */}
-            <p>Phone: {restaurant.display_phone}</p>
+            <p>Phone: {restaurant.phoneNumber}</p>
             <p>Price Range: {restaurant.pricePoint}</p>
-            <p>Address: {restaurant.display_address}</p>
+            <p>Address: {restaurant.address}</p>
             {/* <p>Categories: {restaurant.categories.join(', ')}</p> */}
             {/* <img src={restaurant.image_url} alt={restaurant.restaurantName} /> */}
         </div>
