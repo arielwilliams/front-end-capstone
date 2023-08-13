@@ -61,7 +61,7 @@ const Search = () => {
 
   const postDataToFavList = async (searchResult) => {
     console.log("Data to be sent: ", searchResult); 
-    
+
     const options = {
       method: "POST",
       headers: {
@@ -71,7 +71,7 @@ const Search = () => {
     };
 
     try {
-      const response = await fetch(yelpUrl.backend + '/search/save-favorite', options);
+      const response = await fetch(yelpUrl.backend + '/save-favorite', options);
       if (response.ok) {
         console.log("Restaurant saved to favorites");
       } else {
