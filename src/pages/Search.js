@@ -59,16 +59,15 @@ const Search = () => {
     return input.toLowerCase().trim();
   };
 
-  const postDataToFavList = async (searchResultIndex) => {
-    const selectedResult = searchResults[searchResultIndex]; // Get the specific search result based on the index
-    console.log("Data to be sent: ", selectedResult); 
+  const postDataToFavList = async (searchResult) => {
+    console.log("Data to be sent: ", searchResult); 
 
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(selectedResult), // Use the selected search result for sending data
+      body: JSON.stringify(searchResult), 
     };
 
     try {
@@ -178,7 +177,7 @@ const Search = () => {
               </address>
               <button
                 type="button"
-                onClick={() => postDataToFavList(index)} // Pass the index of the clicked result
+                onClick={() => postDataToFavList(searchResult)} 
                 style={{ color: isLiked ? "red" : "black" }}
                 // disabled={isLiked}
               >
