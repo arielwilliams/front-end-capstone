@@ -18,7 +18,7 @@ const Search = () => {
   const handleLikeClick = (searchResult) => {
     // setLikedResults((prevLikedResults) => [...prevLikedResults, index]);
     // console.log(index);
-    postDataToFavList(searchResult);
+    postDataToFavList(searchResult, input);
   };
 
   const yelpUrl = {
@@ -60,6 +60,8 @@ const Search = () => {
   };
 
   const postDataToFavList = async (searchResult) => {
+    console.log("Data to be sent: ", searchResult); 
+    
     const options = {
       method: "POST",
       headers: {
@@ -68,9 +70,16 @@ const Search = () => {
       body: JSON.stringify(searchResult),
     };
 
-    const response = await fetch(yelpUrl.backend, options);
-
-    return response.json();
+    try {
+      const response = await fetch(yelpUrl.backend + '/search/save-favorite', options);
+      if (response.ok) {
+        console.log("Restaurant saved to favorites");
+      } else {
+        console.error("Failed to save restaurant to favorites");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
   };
 
   ////// fetchData makes GET request to BE to grab response from yelp API ///////
@@ -167,7 +176,7 @@ const Search = () => {
               </address>
               <button
                 type="button"
-                onClick={() => handleLikeClick(searchResult)}
+                onClick={() => postDataToFavList(searchResult)}
                 style={{ color: isLiked ? "red" : "black" }}
                 // disabled={isLiked}
               >
