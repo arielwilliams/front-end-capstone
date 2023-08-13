@@ -13,13 +13,13 @@ const Search = () => {
   // should the like button associated with the search result be submitted
   // as a form?
   // created new useState to account for clicking like button next to a restaurant
-  const [likedResults, setLikedResults] = useState([]);
+  // const [likedResults, setLikedResults] = useState([]);
 
-  const handleLikeClick = (searchResult) => {
-    // setLikedResults((prevLikedResults) => [...prevLikedResults, index]);
-    // console.log(index);
-    postDataToFavList(searchResult, input);
-  };
+  // const handleLikeClick = (searchResult) => {
+  //   // setLikedResults((prevLikedResults) => [...prevLikedResults, index]);
+  //   // console.log(index);
+  //   postDataToFavList(searchResult, input);
+  // };
 
   const yelpUrl = {
     proxy: "https://cors-anywhere.herokuapp.com/",
@@ -59,15 +59,16 @@ const Search = () => {
     return input.toLowerCase().trim();
   };
 
-  const postDataToFavList = async (searchResult) => {
-    console.log("Data to be sent: ", searchResult); 
+  const postDataToFavList = async (searchResultIndex) => {
+    const selectedResult = searchResults[searchResultIndex]; // Get the specific search result based on the index
+    console.log("Data to be sent: ", selectedResult); 
 
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(searchResult),
+      body: JSON.stringify(selectedResult), // Use the selected search result for sending data
     };
 
     try {
@@ -151,7 +152,8 @@ const Search = () => {
       </form>
       {searchResults.length > 0 &&
         searchResults.map((searchResult, index) => {
-          const isLiked = likedResults.includes(index);
+          // const isLiked = likedResults.includes(index);
+          const isLiked = false;
 
           return (
             <section className="pb-4" key={searchResult.id}>
@@ -176,7 +178,7 @@ const Search = () => {
               </address>
               <button
                 type="button"
-                onClick={() => postDataToFavList(searchResult)}
+                onClick={() => postDataToFavList(index)} // Pass the index of the clicked result
                 style={{ color: isLiked ? "red" : "black" }}
                 // disabled={isLiked}
               >
