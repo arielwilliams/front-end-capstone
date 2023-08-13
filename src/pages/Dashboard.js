@@ -1,7 +1,7 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+// import { Route, Routes } from "react-router-dom";
 import AllLists from "../components/AllLists";
-import List from "../components/List";
+// import List from "../components/List";
 
 const Dashboard = (props) => {
   if (Object.keys(props.user).length > 0) {

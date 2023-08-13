@@ -1,18 +1,18 @@
 import React from "react";
-// import { useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { useState } from "react";
+// import { Route, Routes, useNavigate } from "react-router-dom";
 import List from "./List";
 
 
 const AllLists = ({ lists }) => {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    // const [selectedList, setSelectedList] = useState(null);
+    const [selectedList, setSelectedList] = useState(null);
 
-    const handleListClick = (listId) => {
-        // setSelectedList(list);
-        navigate(`/list/${listId}`);
+    const handleListClick = (list) => {
+        setSelectedList(list);
+        // navigate(`/list/${listId}`);
     };
 
 
@@ -22,15 +22,15 @@ const AllLists = ({ lists }) => {
             <ul>
                 {lists.map((list) => (
                     <li key={list.listId}>
-                        <button onClick={() => handleListClick(list.listId)}>{list.name}</button>
+                        <button onClick={() => handleListClick(list)}>{list.name}</button>
                         {/* <Link to={`/dashboard/list/${list.listId}`}>{list.name}</Link> */}
                     </li>
                 ))}
             </ul>
-            <Routes>
+            {/* <Routes>
                 <Route path="/list/:listId" element={<List />} />
-            </Routes>
-            {/* {selectedList && <List list={selectedList} />} */}
+            </Routes> */}
+            {selectedList && <List list={selectedList} />}
         </div>
     );
 };
