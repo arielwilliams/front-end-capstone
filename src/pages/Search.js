@@ -219,7 +219,7 @@ const Search = () => {
               {checkIfRestaurantInFavorites(searchResult.id).length === 0 ? (
                 <button
                   type="button"
-                  onClick={() => handleClickAddToFavoriteList(searchResult.id)}
+                  onClick={() => handleClickAddToFavoriteList(searchResult)}
                 >
                   ♡
                 </button>
