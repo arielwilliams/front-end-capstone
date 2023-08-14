@@ -2,8 +2,12 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import Button from "../components/Button";
 
+// Next step is to reference the value of the restaurantName key to check if
+// what the user searched for on form submit is in their favorites list
+// If restaurantName === restaurantName the heart should render colorless
+// If restaurantName != restaurantName the heart should be red
+
 const Search = () => {
-  const [input, setInput] = useState("");
   // API call requires user location AND input. It throws error if these are missing.
   // If we want to search for a restaurant in a different location we need a location input field in the form
   const [userLocation, setUserLocation] = useState({});
@@ -28,13 +32,19 @@ const Search = () => {
       "https://jakd-backend-capstone.onrender.com/dashboard/list/05861ea7-9f9",
   };
 
+  // // function checks if restaurantName is in favorites list already
+  const checkIfRestaurantInFavorites = (searchedRestaurantName) => {
+    return favoritesList.filter(
+      (element) => element.restaurantName === searchedRestaurantName
+    );
+  };
+
   // Gets user's current location when the webpage loads (currently not being used)
   // On page load of Search, the useEffect triggers and calls getFavoritesList
   // which then makes a GET request to BE for favorites list
   useEffect(() => {
     // getUserLocation();
     getFavoritesList();
-    console.log(favoritesList);
   }, []);
 
   // getFavorites list makes GET request to BE for favorites list
@@ -76,11 +86,16 @@ const Search = () => {
 
   const handleSearchFormSubmit = (event) => {
     event.preventDefault();
-    fetchData();
+    getSearchResults(event);
   };
 
   const sanitizeInput = (input) => {
     return input.toLowerCase().trim();
+  };
+
+  const handleClickAddToFavoriteList = async (searchResult) => {
+    await postDataToFavList(searchResult);
+    await getFavoritesList();
   };
 
   const postDataToFavList = async (searchResult) => {
@@ -106,8 +121,8 @@ const Search = () => {
     }
   };
 
-  ////// fetchData makes GET request to BE to grab response from yelp API ///////
-  const fetchData = async () => {
+  ////// getSearchResults makes GET request to BE to grab response from yelp API ///////
+  const getSearchResults = async (event) => {
     const options = {
       method: "GET",
       headers: {
@@ -117,17 +132,21 @@ const Search = () => {
 
     // .toLowerCase makes everything lowercase, .trim removes white space before and after search term
     // these need to be in request and response in order to work properly
-    const apiURL = `${yelpUrl.backend}?term=${sanitizeInput(input)}`;
+    const apiURL = `${yelpUrl.backend}?term=${sanitizeInput(
+      event.target[0].value
+    )}`;
 
     await fetch(apiURL, options)
       .then((response) => response.json())
       .then((response) => {
         setSearchResults(
           response.businesses.filter((business) =>
-            sanitizeInput(business.name).includes(sanitizeInput(input))
+            sanitizeInput(business.name).includes(
+              sanitizeInput(event.target[0].value)
+            )
           )
         );
-        setInput("");
+        event.target[0].value = "";
       });
   };
 
@@ -160,8 +179,6 @@ const Search = () => {
       <form onSubmit={(event) => handleSearchFormSubmit(event)}>
         <input
           placeholder="Type to search..."
-          value={input}
-          onChange={(event) => setInput(event.target.value)}
           className="bg-blue-200 rounded-lg py-4 px-6 text-2xl focus:outline-none focus:ring focus:border-blue-300"
           type="search"
           required
@@ -175,9 +192,6 @@ const Search = () => {
       </form>
       {searchResults.length > 0 &&
         searchResults.map((searchResult, index) => {
-          // const isLiked = likedResults.includes(index);
-          const isLiked = false;
-
           return (
             <section className="pb-4" key={searchResult.id}>
               <h3 className="text-lg">{searchResult.name}</h3>
@@ -199,14 +213,18 @@ const Search = () => {
                   </li>
                 </ul>
               </address>
-              <button
-                type="button"
-                onClick={() => postDataToFavList(searchResult)}
-                style={{ color: isLiked ? "red" : "black" }}
-                // disabled={isLiked}
-              >
-                ♡
-              </button>
+              {checkIfRestaurantInFavorites(searchResult.name).length === 0 ? (
+                <button
+                  type="button"
+                  onClick={() => handleClickAddToFavoriteList(searchResult)}
+                >
+                  ♡
+                </button>
+              ) : (
+                <button type="button" disabled={true}>
+                  ♥️
+                </button>
+              )}
             </section>
           );
         })}
