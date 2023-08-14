@@ -8,10 +8,9 @@ const Search = () => {
   // If we want to search for a restaurant in a different location we need a location input field in the form
   const [userLocation, setUserLocation] = useState({});
   const [searchResults, setSearchResults] = useState([]);
+  // on page load, user's favorite's list becomes accesible to reference
+  const [favoritesList, setFavoritesList] = useState([]);
 
-  // my thoughts: each result will need to have a heart next to it and
-  // should the like button associated with the search result be submitted
-  // as a form?
   // created new useState to account for clicking like button next to a restaurant
   // const [likedResults, setLikedResults] = useState([]);
 
@@ -25,12 +24,37 @@ const Search = () => {
     proxy: "https://cors-anywhere.herokuapp.com/",
     api: "https://api.yelp.com/v3/businesses/search",
     backend: "https://jakd-backend-capstone.onrender.com/search",
+    favorites:
+      "https://jakd-backend-capstone.onrender.com/dashboard/list/05861ea7-9f9",
   };
 
-  // gets user's current location when the webpage loads
+  // Gets user's current location when the webpage loads (currently not being used)
+  // On page load of Search, the useEffect triggers and calls getFavoritesList
+  // which then makes a GET request to BE for favorites list
   useEffect(() => {
-    getUserLocation();
+    // getUserLocation();
+    getFavoritesList();
+    console.log(favoritesList);
   }, []);
+
+  // getFavorites list makes GET request to BE for favorites list
+  const getFavoritesList = async () => {
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+      },
+    };
+
+    const favoritesListUrl = `${yelpUrl.favorites}`;
+
+    await fetch(favoritesListUrl, options)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        setFavoritesList(response);
+      });
+  };
 
   const getUserLocation = () => {
     try {
@@ -60,18 +84,18 @@ const Search = () => {
   };
 
   const postDataToFavList = async (searchResult) => {
-    console.log("Data to be sent: ", searchResult); 
+    console.log("Data to be sent: ", searchResult);
 
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(searchResult), 
+      body: JSON.stringify(searchResult),
     };
 
     try {
-      const response = await fetch(yelpUrl.backend + '/save-favorite', options);
+      const response = await fetch(yelpUrl.backend + "/save-favorite", options);
       if (response.ok) {
         console.log("Restaurant saved to favorites");
       } else {
@@ -177,11 +201,11 @@ const Search = () => {
               </address>
               <button
                 type="button"
-                onClick={() => postDataToFavList(searchResult)} 
+                onClick={() => postDataToFavList(searchResult)}
                 style={{ color: isLiked ? "red" : "black" }}
                 // disabled={isLiked}
               >
-                ❤️
+                ♡
               </button>
             </section>
           );
