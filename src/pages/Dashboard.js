@@ -10,9 +10,8 @@ const Dashboard = (props) => {
           Welcome to your Dashboard!
         </h1>
         <h2 className="text-center font-light">
-          On your Dashboard you have access to create new lists and manage your
-          existing lists. You can get started by heading to the Search page to
-          add restaurants to your favorites list!
+          On your Dashboard you can view all the restaurants you want to try and manage your favorites. 
+          You can get started by heading to the Search page to add restaurants to your favorites list!
         </h2>
         <h2 className="text-left font-bold text-2xl ml-6">
           {props.user.given_name}'s Lists

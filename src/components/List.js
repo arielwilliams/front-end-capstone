@@ -51,7 +51,7 @@ const List = ({ list }) => {
             }
 
             fetchRestaurants();
-            return response.json();
+            return response.text();
         })
         .catch((error) => 
             console.log(error))

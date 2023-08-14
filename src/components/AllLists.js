@@ -14,7 +14,6 @@ const AllLists = ({ lists }) => {
 
     return (
         <div>
-            <h2>My lists</h2>
             <ul>
                 {lists.map((list) => (
                     <li key={list.listId}>

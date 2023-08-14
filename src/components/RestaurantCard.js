@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 const RestaurantCard = ({restaurant, deleteRestaurant}) => {
 
     const onDeleteClick = () => {
-        // console.log("Delete button clicked for Restaurant:", restaurant.restaurantId);
         deleteRestaurant(restaurant.restaurantId);
     }
 
@@ -25,15 +24,13 @@ const RestaurantCard = ({restaurant, deleteRestaurant}) => {
 };
 
 RestaurantCard.propTypes = {
-    restaurant: PropTypes.arrayOf(
-        PropTypes.shape({
-            restaurantName: PropTypes.string.isRequired,
-            cuisine: PropTypes.string.isRequired,
-            phoneNumber: PropTypes.string.isRequired,
-            pricePoint: PropTypes.string.isRequired,
-            address: PropTypes.string.isRequired
-        })
-    ).isRequired,
+    restaurant: PropTypes.shape({
+        restaurantName: PropTypes.string.isRequired,
+        cuisine: PropTypes.string.isRequired,
+        phoneNumber: PropTypes.string.isRequired,
+        pricePoint: PropTypes.string.isRequired,
+        address: PropTypes.string.isRequired
+    }).isRequired,
     deleteRestaurant: PropTypes.func.isRequired
 };
 
