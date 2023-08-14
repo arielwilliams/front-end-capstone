@@ -13,13 +13,16 @@ const RestaurantCard = ({restaurant, deleteRestaurant}) => {
 
 
     return (
-        <div className="restaurant-card">
+        <div className="restaurant-card col-span-5 p-4">
+            <div className="bg-white border rounded p-4">
             <h3>{restaurant.restaurantName}</h3>
             <p>Cuisine: {restaurant.cuisine}</p>
             <p>Phone: {restaurant.phoneNumber}</p>
             <p>Price Range: {restaurant.pricePoint}</p>
             <p>Address: {restaurant.address}</p>
-            <button onClick={onDeleteClick}>Delete Restaurant</button>
+            <button className= "bg-white border rounded" onClick={onDeleteClick}>Delete Restaurant</button>
+           
+        </div>
         </div>
     );
 };
