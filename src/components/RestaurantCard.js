@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 const RestaurantCard = ({restaurant, deleteRestaurant}) => {
 
     const onDeleteClick = () => {
-        console.log("Delete button clicked for Restaurant:", restaurant.restaurantId);
+        // console.log("Delete button clicked for Restaurant:", restaurant.restaurantId);
         deleteRestaurant(restaurant.restaurantId);
     }
 
