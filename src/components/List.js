@@ -9,6 +9,14 @@ const List = ({ list }) => {
 
     const [restaurants, setRestaurants] = useState([]);
 
+    const [randomRestaurant, setRandomRestaurant] = useState(null);
+
+    const getRandomRestaurant = () => {
+        const randomIndex = Math.floor(Math.random() * restaurants.length);
+        const selectedRandomRestaurant = restaurants[randomIndex];
+        setRandomRestaurant(selectedRandomRestaurant);
+    };
+
 
     const fetchRestaurants = async () => {
         try {
@@ -64,11 +72,18 @@ const List = ({ list }) => {
     return (
         <div> 
             <h2>List Details:</h2>
+            <button onClick={getRandomRestaurant}>Can't choose? Click here!</button>
             <ul> 
                 {restaurants.map((restaurant) => (
                     <RestaurantCard key={restaurant.id} restaurant={restaurant} deleteRestaurant={deleteRestaurant} />
             ))}
             </ul>
+            {randomRestaurant && (
+                <div className="selected-restaurant">
+                    <h2>Try here:</h2>
+                    <RestaurantCard restaurant={randomRestaurant} />
+                </div>
+            )}
         </div>
     );
 
