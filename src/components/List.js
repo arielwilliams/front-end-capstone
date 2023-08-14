@@ -26,8 +26,6 @@ const List = ({ list }) => {
             }
             const data = await response.json();
 
-            console.log("fetched restaurants:", data)
-
             setRestaurants(data);
             } catch (error) {
             console.error("Error fetching restaurants:", error);
@@ -41,8 +39,6 @@ const List = ({ list }) => {
 
     const deleteRestaurant = (restaurantId) => {
 
-        console.log("Delete button clicked for rEstaurant:", restaurantId);
-
         fetch(`https://jakd-backend-capstone.onrender.com/dashboard/list/${list.listId}/${restaurantId}`, {
             method: "DELETE",
             headers: {
@@ -53,17 +49,10 @@ const List = ({ list }) => {
             if (!response.ok) {
                 throw new Error("Network response was not okay");
             }
-            console.log("restaurant deleted successfully");
 
             fetchRestaurants();
             return response.json();
         })
-        // .then(() => {
-            
-        //     console.log("restaurant deleted successfully");
-
-        //     fetchRestaurants();
-        // })
         .catch((error) => 
             console.log(error))
     
