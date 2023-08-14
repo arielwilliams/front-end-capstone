@@ -1,18 +1,14 @@
 import React from "react";
 import { useState } from "react";
-// import { Route, Routes, useNavigate } from "react-router-dom";
 import List from "./List";
 
 
 const AllLists = ({ lists }) => {
 
-    // const navigate = useNavigate();
-
     const [selectedList, setSelectedList] = useState(null);
 
     const handleListClick = (list) => {
         setSelectedList(list);
-        // navigate(`/list/${listId}`);
     };
 
 
@@ -23,13 +19,9 @@ const AllLists = ({ lists }) => {
                 {lists.map((list) => (
                     <li key={list.listId}>
                         <button onClick={() => handleListClick(list)}>{list.name}</button>
-                        {/* <Link to={`/dashboard/list/${list.listId}`}>{list.name}</Link> */}
                     </li>
                 ))}
             </ul>
-            {/* <Routes>
-                <Route path="/list/:listId" element={<List />} />
-            </Routes> */}
             {selectedList && <List list={selectedList} />}
         </div>
     );
