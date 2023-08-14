@@ -38,21 +38,24 @@ const List = ({ list }) => {
         fetch(`https://jakd-backend-capstone.onrender.com/dashboard/list/${list.listId}/${restaurantId}`, {
             method: "DELETE",
             headers: {
-                "Content-Type": "applicatoin/json"
+                "Content-Type": "application/json"
             }
         })
         .then(response => {
             if (!response.ok) {
                 throw new Error("Network response was not okay");
             }
-            return response.json();
-        })
-        .then(() => {
-            
             console.log("restaurant deleted successfully");
 
             fetchRestaurants();
+            return response.json();
         })
+        // .then(() => {
+            
+        //     console.log("restaurant deleted successfully");
+
+        //     fetchRestaurants();
+        // })
         .catch((error) => 
             console.log(error))
     
