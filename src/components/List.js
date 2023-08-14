@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
+import PropTypes from "prop-types";
 
 const List = ({ list }) => {
 
@@ -29,25 +30,6 @@ const List = ({ list }) => {
         fetchRestaurants();
     }, [list]);
 
-
-    // useEffect(() => {
-    //     const fetchRestaurants = async () => {
-    //         try {
-    //             const response = await fetch(`https://jakd-backend-capstone.onrender.com/dashboard/list/${list.listId}`);
-    //             if (!response.ok) {
-    //                 throw new Error("Network response was not okay");
-    //             }
-    //             const data = await response.json();
-    //             // console.log("LOOK HERE")
-    //             // console.log("fetched data:", data);
-    //             setRestaurants(data);
-    //             } catch (error) {
-    //             console.error("Error fetching restaurants:", error);
-    //             }
-    //     };
-
-    //     fetchRestaurants();
-    // }, [list]);
 
     const deleteRestaurant = (restaurantId) => {
 
@@ -87,6 +69,12 @@ const List = ({ list }) => {
         </div>
     );
 
+};
+
+List.propTypes = {
+    list: PropTypes.shape({
+        listId: PropTypes.string.isRequired
+    }).isRequired,
 };
 
 export default List;
