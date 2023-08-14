@@ -33,10 +33,8 @@ const Search = () => {
   };
 
   // // function checks if restaurantName is in favorites list already
-  const checkIfRestaurantInFavorites = (searchedRestaurantName) => {
-    return favoritesList.filter(
-      (element) => element.restaurantName === searchedRestaurantName
-    );
+  const checkIfRestaurantInFavorites = (yelpId) => {
+    return favoritesList.filter((element) => element.yelpId === yelpId);
   };
 
   // Gets user's current location when the webpage loads (currently not being used)
@@ -140,11 +138,16 @@ const Search = () => {
       .then((response) => response.json())
       .then((response) => {
         setSearchResults(
-          response.businesses.filter((business) =>
-            sanitizeInput(business.name).includes(
-              sanitizeInput(event.target[0].value)
-            )
-          )
+          response.businesses
+          // Don't delete commented out code below: this code grabs restaurants that ONLY include what the user searched for
+          // Issue is for a restaurant chain with one location that has special characters gets filtered out
+          // Example: Burbs vs Burb's. The Ballard location has an apostrophe but the other locations don't
+
+          // response.businesses.filter((business) =>
+          //   sanitizeInput(business.name).includes(
+          //     sanitizeInput(event.target[0].value)
+          //   )
+          // )
         );
         event.target[0].value = "";
       });
@@ -213,10 +216,10 @@ const Search = () => {
                   </li>
                 </ul>
               </address>
-              {checkIfRestaurantInFavorites(searchResult.name).length === 0 ? (
+              {checkIfRestaurantInFavorites(searchResult.id).length === 0 ? (
                 <button
                   type="button"
-                  onClick={() => handleClickAddToFavoriteList(searchResult)}
+                  onClick={() => handleClickAddToFavoriteList(searchResult.id)}
                 >
                   ♡
                 </button>
