@@ -1,4 +1,5 @@
 import React from "react";
+import AllLists from "../components/AllLists";
 
 const Dashboard = (props) => {
   if (Object.keys(props.user).length > 0) {
@@ -14,8 +15,9 @@ const Dashboard = (props) => {
           add restaurants to your favorites list!
         </h2>
         <h2 className="text-left font-bold text-2xl ml-6">
-          {props.user.given_name}'s Restaurants
+          {props.user.given_name}'s Lists
         </h2>
+        <AllLists lists={props.lists} />
       </div>
     );
   }

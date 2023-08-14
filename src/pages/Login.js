@@ -15,6 +15,10 @@ const Login = ({ userCallback }) => {
     document.getElementById("signInDiv").hidden = true;
     navigate("/dashboard")
     console.log(userObject)
+    // api call to the backend, post the user info including name and picture and sub ID 
+    // userObject.result.sub
+    // logic in the api call in the backend to check if that ID is already in the database
+    // if it is, terminate API. if it has not, post it 
     
   };
 
