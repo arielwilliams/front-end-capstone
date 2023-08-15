@@ -18,8 +18,6 @@ const Login = ({ userCallback }) => {
 
     const userId = userObject.sub; // Extract the sub ID
 
-    // Check if user ID exists in the database
-    // ...
 
 fetch(`jakd-backend-capstone.onrender.com/dashboard/user/users`)
 .then(response => response.json())
