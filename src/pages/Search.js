@@ -3,21 +3,11 @@ import { useState } from "react";
 import Button from "../components/Button";
 
 const Search = () => {
-  // API call requires user location AND input. It throws error if these are missing.
-  // If we want to search for a restaurant in a different location we need a location input field in the form
-  const [userLocation, setUserLocation] = useState({});
+  // don't delete: can be used for further development features
+  // const [userLocation, setUserLocation] = useState({});
   const [searchResults, setSearchResults] = useState([]);
   // on page load, user's favorite's list becomes accesible to reference
   const [favoritesList, setFavoritesList] = useState([]);
-
-  // created new useState to account for clicking like button next to a restaurant
-  // const [likedResults, setLikedResults] = useState([]);
-
-  // const handleLikeClick = (searchResult) => {
-  //   // setLikedResults((prevLikedResults) => [...prevLikedResults, index]);
-  //   // console.log(index);
-  //   postDataToFavList(searchResult, input);
-  // };
 
   const yelpUrl = {
     proxy: "https://cors-anywhere.herokuapp.com/",
@@ -32,9 +22,8 @@ const Search = () => {
     return favoritesList.filter((element) => element.yelpId === yelpId);
   };
 
-  // Gets user's current location when the webpage loads (currently not being used)
-  // On page load of Search, the useEffect triggers and calls getFavoritesList
-  // which then makes a GET request to BE for favorites list
+  // don't delete: gets user's current location when the webpage loads (can be used for further development features)
+  // On page load of Search, the useEffect triggers and calls getFavoritesList which then makes a GET request to BE for favorites list
   useEffect(() => {
     // getUserLocation();
     getFavoritesList();
@@ -59,26 +48,29 @@ const Search = () => {
       });
   };
 
-  const getUserLocation = () => {
-    try {
-      navigator.geolocation.getCurrentPosition(success);
-    } catch (error) {
-      console.error(
-        `${error}: Please either enable or use a browser that supports geolocation`
-      );
-    }
-  };
+  // don't delete: can be used for further development features
+  // const getUserLocation = () => {
+  //   try {
+  //     navigator.geolocation.getCurrentPosition(success);
+  //   } catch (error) {
+  //     console.error(
+  //       `${error}: Please either enable or use a browser that supports geolocation`
+  //     );
+  //   }
+  // };
 
+  // don't delete: can be used for further development features
   // if the user's location exists, state will get updated
-  const success = (position) => {
-    setUserLocation({
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude,
-    });
-  };
+  // const success = (position) => {
+  //   setUserLocation({
+  //     latitude: position.coords.latitude,
+  //     longitude: position.coords.longitude,
+  //   });
+  // };
 
   const handleSearchFormSubmit = (event) => {
     event.preventDefault();
+    console.log(event);
     getSearchResults(event);
   };
 
@@ -125,9 +117,10 @@ const Search = () => {
 
     // .toLowerCase makes everything lowercase, .trim removes white space before and after search term
     // these need to be in request and response in order to work properly
+    // target is the html element where the onSubmit event occurred
     const apiURL = `${yelpUrl.backend}?term=${sanitizeInput(
       event.target[0].value
-    )}`;
+    )}&location=${sanitizeInput(event.target[1].value)}`;
 
     await fetch(apiURL, options)
       .then((response) => response.json())
@@ -144,7 +137,9 @@ const Search = () => {
           //   )
           // )
         );
+        // don't delete: these line of code empties both search bars onSubmit, comment them out to see what the user typed into both fields
         event.target[0].value = "";
+        event.target[1].value = "";
       });
   };
 
