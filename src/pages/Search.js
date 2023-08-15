@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Button from "../components/Button";
 
 const Search = () => {
   // don't delete: can be used for further development features
   // const [userLocation, setUserLocation] = useState({});
   const [searchResults, setSearchResults] = useState([]);
-  // on page load, user's favorite's list becomes accesible to reference
+  // on page load, user's favorite's list becomes accessible to reference
   const [favoritesList, setFavoritesList] = useState([]);
 
   const yelpUrl = {
@@ -17,7 +16,7 @@ const Search = () => {
       "https://jakd-backend-capstone.onrender.com/dashboard/list/05861ea7-9f9",
   };
 
-  // // function checks if restaurantName is in favorites list already
+  // function checks if restaurantName is in favorites list already
   const checkIfRestaurantInFavorites = (yelpId) => {
     return favoritesList.filter((element) => element.yelpId === yelpId);
   };
@@ -106,7 +105,7 @@ const Search = () => {
     }
   };
 
-  ////// getSearchResults makes GET request to BE to grab response from yelp API ///////
+  // getSearchResults makes GET request to BE to grab response from yelp API
   const getSearchResults = async (event) => {
     const options = {
       method: "GET",
