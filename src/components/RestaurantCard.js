@@ -4,7 +4,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 
-const RestaurantCard = ({restaurant, deleteRestaurant}) => {
+const RestaurantCard = ({restaurant, deleteRestaurant, isRandom}) => {
 
     const onDeleteClick = () => {
         deleteRestaurant(restaurant.restaurantId);
@@ -18,7 +18,7 @@ const RestaurantCard = ({restaurant, deleteRestaurant}) => {
             <p>Phone: {restaurant.phoneNumber}</p>
             <p>Price Range: {restaurant.pricePoint}</p>
             <p>Address: {restaurant.address}</p>
-            <button onClick={onDeleteClick}>Delete Restaurant</button>
+            {isRandom ? null: <button onClick={onDeleteClick}>Delete Restaurant</button>}
         </div>
     );
 };

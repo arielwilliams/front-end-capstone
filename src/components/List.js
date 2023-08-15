@@ -62,13 +62,14 @@ const List = ({ list }) => {
             <button onClick={getRandomRestaurant}>Can't choose? Click here!</button>
             <ul> 
                 {restaurants.map((restaurant) => (
-                    <RestaurantCard key={restaurant.id} restaurant={restaurant} deleteRestaurant={deleteRestaurant} />
+                    <RestaurantCard key={restaurant.id} restaurant={restaurant} deleteRestaurant={deleteRestaurant}
+                    isRandom={false}/>
             ))}
             </ul>
             {randomRestaurant && (
                 <div className="selected-restaurant">
                     <h2>Try here:</h2>
-                    <RestaurantCard restaurant={randomRestaurant} />
+                    <RestaurantCard restaurant={randomRestaurant} isRandom={true} />
                 </div>
             )}
         </div>
