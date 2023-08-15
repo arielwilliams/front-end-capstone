@@ -153,34 +153,34 @@ const Search = () => {
       <h1 className="text-center font-semibold text-5xl m-6">
         Welcome to the Search Page
       </h1>
-      <h2 className="font-semibold">
-        Please enter a restaurant into the search field below.
+      <h2 className="font-semibold mt-6 mb-4">
+        Please enter a restaurant name and location into the search fields
+        below.
       </h2>
-      <form onSubmit={(event) => handleSearchFormSubmit(event)}>
-        <input
-          placeholder="Enter restaurant name..."
-          className="bg-blue-200 rounded-lg py-4 px-6 text-2xl focus:outline-none focus:ring focus:border-blue-300"
-          type="search"
-          required
-        />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white font-bold py-4 px-6 rounded ml-2"
-        >
-          Submit
-        </button>
-        <input
-          placeholder="Enter location..."
-          className="bg-blue-200 rounded-lg py-4 px-6 text-2xl focus:outline-none focus:ring focus:border-blue-300"
-          type="search"
-          required
-        />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white font-bold py-4 px-6 rounded ml-2"
-        >
-          Submit
-        </button>
+      <form
+        onSubmit={(event) => handleSearchFormSubmit(event)}
+        className="space-y-4"
+      >
+        <div className="flex space-x-4">
+          <input
+            placeholder="Enter restaurant name..."
+            className="flex-grow bg-blue-200 rounded-lg py-4 px-6 text-2xl focus:outline-none focus:ring focus:border-blue-300"
+            type="search"
+            required
+          />
+          <input
+            placeholder="Enter location..."
+            className="flex-grow bg-blue-200 rounded-lg py-4 px-6 text-2xl focus:outline-none focus:ring focus:border-blue-300"
+            type="search"
+            required
+          />
+          <button
+            type="submit"
+            className="bg-blue-500 text-white font-bold py-4 px-6 rounded ml-2"
+          >
+            Submit
+          </button>
+        </div>
       </form>
       {searchResults.length > 0 &&
         searchResults.map((searchResult, index) => {
