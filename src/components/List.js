@@ -5,8 +5,6 @@ import PropTypes from "prop-types";
 
 const List = ({ list }) => {
 
-    console.log(list)
-
     const [restaurants, setRestaurants] = useState([]);
 
     const [randomRestaurant, setRandomRestaurant] = useState(null);

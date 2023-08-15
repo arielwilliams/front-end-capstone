@@ -49,6 +49,7 @@ function App() {
           </header>
           <main>
             <Routes>
+              <Route index element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard user={user} lists={listData}/>} />
               <Route path="/list/:listId" element={<List />} />
