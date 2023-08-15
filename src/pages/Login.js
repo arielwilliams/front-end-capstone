@@ -16,36 +16,43 @@ const Login = ({ userCallback }) => {
     navigate("/dashboard");
     console.log(userObject);
 
-    const userId = userObject.sub; // Extract the sub ID
-
-
-fetch(`jakd-backend-capstone.onrender.com/dashboard/user/users`)
-.then(response => response.json())
-.then(data => {
-  if (!data.exists) {
-    // If user ID doesn't exist, save it in the database
-    fetch(`jakd-backend-capstone.onrender.com/dashboard/user/save-user`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ subId: userId }),
-    })
-    .then(response => response.json())
-    .then(result => {
-      console.log("User saved:", result);
+    fetch(`http://localhost:5000/dashboard/user/users`)
+    .then(response => response.json()) 
+    .then(data => {
+      try {
+        const userId = userObject.sub; // Extract the sub ID
+        const userExists = data.some(user => user.subId === userId);
+  
+        if (userExists) {
+          console.log("User exists");
+        } else {
+          // Save the user to the database
+          fetch(`http://localhost:5000/dashboard/user/save-user`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ subId: userId }),
+          })
+          .then(response => response.json())
+          .then(result => {
+            console.log("User saved sucessfully:", result);
+          })
+          .catch(error => {
+            console.log("Error saving user:", error);
+          });
+        }
+      } catch (error) {
+        console.log("Error processing user data:", error);
+      }
     })
     .catch(error => {
-      console.log("Error saving user:", error);
+      console.log("Error fetching data:", error);
     });
-  }
-})
-.catch(error => {
-  console.log("Error checking user:", error);
-});
 
 
-  };
+};
+
 
   const handleSignOut = (event) => {
     setUser({});
