@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Login = ({ userCallback }) => {
   const [user, setUser] = useState({});
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleCallbackResponse = (response) => {
     console.log("Encoded JWT ID token: " + response.credential);
@@ -13,13 +13,40 @@ const Login = ({ userCallback }) => {
     setUser(userObject);
     userCallback(userObject);
     document.getElementById("signInDiv").hidden = true;
-    navigate("/dashboard")
-    console.log(userObject)
-    // api call to the backend, post the user info including name and picture and sub ID 
-    // userObject.result.sub
-    // logic in the api call in the backend to check if that ID is already in the database
-    // if it is, terminate API. if it has not, post it 
-    
+    navigate("/dashboard");
+    console.log(userObject);
+
+    const userId = userObject.sub; // Extract the sub ID
+
+    // Check if user ID exists in the database
+    // ...
+
+fetch(`http://localhost:5000/dashboard/user/users`)
+.then(response => response.json())
+.then(data => {
+  if (!data.exists) {
+    // If user ID doesn't exist, save it in the database
+    fetch(`http://localhost:5000/dashboard/user/save-user`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ subId: userId }),
+    })
+    .then(response => response.json())
+    .then(result => {
+      console.log("User saved:", result);
+    })
+    .catch(error => {
+      console.log("Error saving user:", error);
+    });
+  }
+})
+.catch(error => {
+  console.log("Error checking user:", error);
+});
+
+
   };
 
   const handleSignOut = (event) => {
@@ -43,8 +70,7 @@ const Login = ({ userCallback }) => {
     });
   }, []);
 
-  // if we have no user: sign in button
-  // if we have a user: show the log out button
+
 
   return (
     <div className="App">
