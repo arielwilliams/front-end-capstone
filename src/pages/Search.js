@@ -2,11 +2,6 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import Button from "../components/Button";
 
-// Next step is to reference the value of the restaurantName key to check if
-// what the user searched for on form submit is in their favorites list
-// If restaurantName === restaurantName the heart should render colorless
-// If restaurantName != restaurantName the heart should be red
-
 const Search = () => {
   // API call requires user location AND input. It throws error if these are missing.
   // If we want to search for a restaurant in a different location we need a location input field in the form
@@ -153,24 +148,6 @@ const Search = () => {
       });
   };
 
-  ////////////// FE calls yelp API (previous fetchData func) ////////////
-  // const fetchData = async () => {
-  //   const options = {
-  //     method: "GET",
-  //     mode: "cors",
-  //     headers: {
-  //       accept: "application/json",
-  //       Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
-  //     },
-  //   };
-
-  //   const apiURL = `${yelpUrl.proxy}${yelpUrl.api}?latitude=${userLocation.latitude}&longitude=${userLocation.longitude}&term=${input}`;
-
-  //   await fetch(apiURL, options)
-  //     .then((response) => response.json())
-  //     .then((response) => setSearchResult(response));
-  // };
-  /////////////////////////////////////////////////////////////////////////
   return (
     <>
       <h1 className="text-center font-semibold text-5xl m-6">
@@ -181,7 +158,19 @@ const Search = () => {
       </h2>
       <form onSubmit={(event) => handleSearchFormSubmit(event)}>
         <input
-          placeholder="Type to search..."
+          placeholder="Enter restaurant name..."
+          className="bg-blue-200 rounded-lg py-4 px-6 text-2xl focus:outline-none focus:ring focus:border-blue-300"
+          type="search"
+          required
+        />
+        <button
+          type="submit"
+          className="bg-blue-500 text-white font-bold py-4 px-6 rounded ml-2"
+        >
+          Submit
+        </button>
+        <input
+          placeholder="Enter location..."
           className="bg-blue-200 rounded-lg py-4 px-6 text-2xl focus:outline-none focus:ring focus:border-blue-300"
           type="search"
           required
