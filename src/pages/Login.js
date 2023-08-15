@@ -21,12 +21,12 @@ const Login = ({ userCallback }) => {
     // Check if user ID exists in the database
     // ...
 
-fetch(`http://localhost:5000/dashboard/user/users`)
+fetch(`jakd-backend-capstone.onrender.com/dashboard/user/users`)
 .then(response => response.json())
 .then(data => {
   if (!data.exists) {
     // If user ID doesn't exist, save it in the database
-    fetch(`http://localhost:5000/dashboard/user/save-user`, {
+    fetch(`jakd-backend-capstone.onrender.com/dashboard/user/save-user`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

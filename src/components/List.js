@@ -62,6 +62,7 @@ const List = ({ list }) => {
         <div> 
             <h2>List Details:</h2>
             <ul> 
+            <div className="restaurant-list grid grid-cols-5 gap-4 p-4 justify-content: center"></div>
                 {restaurants.map((restaurant) => (
                     <RestaurantCard key={restaurant.id} restaurant={restaurant} deleteRestaurant={deleteRestaurant} />
             ))}
