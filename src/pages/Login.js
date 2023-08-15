@@ -68,17 +68,20 @@ const Login = ({ userCallback }) => {
 
   useEffect(() => {
     /* global google */
-    google.accounts.id.initialize({
-      client_id:
-        "865937179776-r5timpp1f57epgi3q06blrv8ftvu5qev.apps.googleusercontent.com",
-      callback: handleCallbackResponse,
-    });
 
-    google.accounts.id.renderButton(document.getElementById("signInDiv"), {
-      theme: "outline",
-      size: "large",
-    });
-  }, []);
+    if (typeof google !== "undefined" && google.accounts) {
+      google.accounts.id.initialize({
+        client_id:
+          "865937179776-r5timpp1f57epgi3q06blrv8ftvu5qev.apps.googleusercontent.com",
+        callback: handleCallbackResponse,
+      });
+  
+      google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+        theme: "outline",
+        size: "large",
+      });
+    }
+    }, []);
 
   // if we have no user: sign in button
   // if we have a user: show the log out button
