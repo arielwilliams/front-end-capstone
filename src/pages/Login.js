@@ -19,6 +19,39 @@ const Login = ({ userCallback }) => {
     // userObject.result.sub
     // logic in the api call in the backend to check if that ID is already in the database
     // if it is, terminate API. if it has not, post it 
+    fetch(`https://jakd-backend-capstone.onrender.com/dashboard/user/users`)
+    .then(response => response.json()) 
+    .then(data => {
+      try {
+        const userId = userObject.sub; // Extract the sub ID
+        const userExists = data.some(user => user.subId === userId);
+  
+        if (userExists) {
+          console.log("User exists");
+        } else {
+          // Save the user to the database
+          fetch(`https://jakd-backend-capstone.onrender.com/dashboard/user/save-user`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ subId: userId }),
+          })
+          .then(response => response.json())
+          .then(result => {
+            console.log("User saved sucessfully:", result);
+          })
+          .catch(error => {
+            console.log("Error saving user:", error);
+          });
+        }
+      } catch (error) {
+        console.log("Error processing user data:", error);
+      }
+    })
+    .catch(error => {
+      console.log("Error fetching data:", error);
+    });
     
   };
 
