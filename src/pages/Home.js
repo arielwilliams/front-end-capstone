@@ -12,7 +12,7 @@ const Home = () => {
       <img src={logo} alt="Logo" className="absolute top-4 right-4 w-16 h-16" />
       <div className="w-1/2 bg-cover bg-center h-full" 
         style={{ backgroundImage: `url(${homeImageURL})`,
-        marginTop: "7rem",
+        // marginTop: "7rem",
       }}
     ></div>
 
