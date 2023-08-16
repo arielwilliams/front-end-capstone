@@ -5,7 +5,7 @@ const aboutUsData = [
     blurb: "I like food",
     github: "https://github.com/arielwilliams",
     linkedin: "https://linkedin.com/in/ariel-w-827228ab",
-    image: "/logo512.png",
+    image: "/ariel.jpg",
   },
   {
     id: 2,
