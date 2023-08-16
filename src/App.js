@@ -25,7 +25,9 @@ function App() {
   useEffect(() => {
     const fetchListData = async () => {
       try {
-        const response = await fetch(`https://jakd-backend-capstone.onrender.com/dashboard`);
+        const response = await fetch(
+          `https://jakd-backend-capstone.onrender.com/dashboard/list/42bef239-dc7`
+        );
         if (!response.ok) {
           throw new Error("Network response was not okay");
         }
@@ -38,7 +40,6 @@ function App() {
 
     fetchListData();
   }, []);
-
 
   return (
     <div>
@@ -53,7 +54,16 @@ function App() {
               <Route index element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/dashboard" element={<Dashboard user={user} lists={listData}/>} />
+              <Route
+                path="/dashboard"
+                element={
+                  <Dashboard
+                    user={user}
+                    list={listData}
+                    setListData={setListData}
+                  />
+                }
+              />
               <Route path="/list/:listId" element={<List />} />
               <Route path="/search" element={<Search />} />
             </Routes>
