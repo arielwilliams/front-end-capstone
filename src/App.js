@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Search from "./pages/Search";
 import Navigation from "./components/Navigation";
 import Login from "./pages/Login";
+import About from "./pages/About";
 import List from "./components/List";
 
 // wrapped <Router> around <div>
@@ -52,6 +53,7 @@ function App() {
             <Routes>
               <Route index element={<Home />} />
               <Route path="/home" element={<Home />} />
+              <Route path="/about" element={<About />} />
               <Route
                 path="/dashboard"
                 element={
