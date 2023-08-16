@@ -1,14 +1,18 @@
 import React from "react";
 
+
 const Home = () => {
 
   const homeImageURL = "https://images.unsplash.com/photo-1569246294372-ed319c674f14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1287&q=80";
   
+  const logo = "https://adas19.slack.com/files/U04M925HJSG/F05MYT6BX98/untitled_design.png";
+
   return (
     <div className="flex items-center justify-center h-screen">
+      <img src={logo} alt="Logo" className="absolute top-4 right-4 w-16 h-16" />
       <div className="w-1/2 bg-cover bg-center h-full" 
         style={{ backgroundImage: `url(${homeImageURL})`,
-        // marginTop: "7rem",
+        marginTop: "7rem",
       }}
     ></div>
 
