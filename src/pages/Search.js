@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-const Search = () => {
+const Search = ({ list, setListData }) => {
   // don't delete: can be used for further development features
   // const [userLocation, setUserLocation] = useState({});
   const [searchResults, setSearchResults] = useState([]);
@@ -13,8 +13,11 @@ const Search = () => {
     api: "https://api.yelp.com/v3/businesses/search",
     backend: "https://jakd-backend-capstone.onrender.com/search",
     favorites:
-      "https://jakd-backend-capstone.onrender.com/dashboard/list/05861ea7-9f9",
+      `https://jakd-backend-capstone.onrender.com/dashboard/user`,
+      
   };
+  // https://jakd-backend-capstone.onrender.com/dashboard/user/:subId/list/:listId
+
 
   // function checks if restaurantName is in favorites list already
   const checkIfRestaurantInFavorites = (yelpId) => {
@@ -23,29 +26,32 @@ const Search = () => {
 
   // don't delete: gets user's current location when the webpage loads (can be used for further development features)
   // On page load of Search, the useEffect triggers and calls getFavoritesList which then makes a GET request to BE for favorites list
-  useEffect(() => {
-    // getUserLocation();
-    getFavoritesList();
-  }, []);
+  // useEffect(() => {
+  //   // getUserLocation();
+  //   console.log({ list })
+
+  //   if (!list || list?.length === 0) return;
+  //   // getFavoritesList();
+  // }, []);
 
   // getFavorites list makes GET request to BE for favorites list
-  const getFavoritesList = async () => {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-      },
-    };
+  // const getFavoritesList = async () => {
+  //   const options = {
+  //     method: "GET",
+  //     headers: {
+  //       accept: "application/json",
+  //     },
+  //   };
 
-    const favoritesListUrl = `${yelpUrl.favorites}`;
+  //   const favoritesListUrl = `${yelpUrl.favorites}/${localStorage.getItem("subId")}/list/Favorites`;
 
-    await fetch(favoritesListUrl, options)
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        setFavoritesList(response);
-      });
-  };
+  //   await fetch(favoritesListUrl, options)
+  //     .then((response) => response.json())
+  //     .then((response) => {
+  //       console.log(response);
+  //       setFavoritesList(response);
+  //     });
+  // };
 
   // don't delete: can be used for further development features
   // const getUserLocation = () => {
@@ -79,11 +85,12 @@ const Search = () => {
 
   const handleClickAddToFavoriteList = async (searchResult) => {
     await postDataToFavList(searchResult);
-    await getFavoritesList();
+    // await getFavoritesList();
   };
 
   const postDataToFavList = async (searchResult) => {
     console.log("Data to be sent: ", searchResult);
+    searchResult['subId'] = localStorage.getItem('subId');
 
     const options = {
       method: "POST",
@@ -94,7 +101,8 @@ const Search = () => {
     };
 
     try {
-      const response = await fetch(yelpUrl.backend + "/save-favorite", options);
+      console.log('here');
+      const response = await fetch(yelpUrl.backend + `/save-favorite/user/${localStorage.getItem("subId")}`, options);
       if (response.ok) {
         console.log("Restaurant saved to favorites");
       } else {

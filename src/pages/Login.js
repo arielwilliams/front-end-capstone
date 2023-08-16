@@ -29,7 +29,10 @@ const Login = ({ userCallback }) => {
         const userGivenName = userObject.given_name;
         const userEmail = userObject.email;
         const profilePicture = userObject.picture;
-  
+        
+        // using local storage to save the subId 
+        localStorage.setItem("subId", userId)
+        
         if (userExists) {
           console.log("User exists");
         } else {
