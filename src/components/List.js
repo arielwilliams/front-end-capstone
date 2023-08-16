@@ -61,10 +61,12 @@ const List = ({ list }) => {
             <h2>List Details:</h2>
             <button onClick={getRandomRestaurant}>Can't choose? Click here!</button>
             <ul> 
+            <div className="restaurant-list grid grid-cols-5 gap-4 p-4 justify-content: center;">
                 {restaurants.map((restaurant) => (
                     <RestaurantCard key={restaurant.id} restaurant={restaurant} deleteRestaurant={deleteRestaurant}
                     isRandom={false}/>
             ))}
+            </div>
             </ul>
             {randomRestaurant && (
                 <div className="selected-restaurant">

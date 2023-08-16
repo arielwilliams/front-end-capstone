@@ -12,7 +12,7 @@ const RestaurantCard = ({restaurant, deleteRestaurant, isRandom}) => {
 
 
     return (
-        <div className="restaurant-card">
+        <div className="restaurant-card col-span-5 p-4 font-raleway font-sans" >
             <h3>{restaurant.restaurantName}</h3>
             <p>Cuisine: {restaurant.cuisine}</p>
             <p>Phone: {restaurant.phoneNumber}</p>
