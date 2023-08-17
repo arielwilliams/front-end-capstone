@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Navigation = (props) => {
   const loggedIn = Object.keys(props.user).length > 0;
 
-  if(loggedIn) {
+  if (loggedIn) {
     return (
       <>
         <nav className="flex justify-between bg-emerald-900 p-4">
@@ -16,7 +16,7 @@ const Navigation = (props) => {
           </Link>
           <Link
             to="/about"
-            className="text-white hover:bg-blue-700 px-4 py-2 rounded"
+            className="text-white hover:bg-emerald-700 px-4 py-2 rounded"
           >
             About
           </Link>
@@ -58,4 +58,3 @@ const Navigation = (props) => {
 };
 
 export default Navigation;
-
