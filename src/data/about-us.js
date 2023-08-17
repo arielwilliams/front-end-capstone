@@ -15,6 +15,7 @@ const aboutUsData = [
       "Our team was brought together by a shared love of food, and this full-stack project has been an incredible learning experience and a great way to wrap up our time at Ada. My restaurant recommendations are Momiji for great sushi, or Harvest Vine for tapas.",
     github: "https://github.com/dnai55",
     linkedin: "https://www.linkedin.com/in/divya-naidoo-1044b1163/",
+    image: "/divya.jpeg",
   },
   {
     id: 3,
