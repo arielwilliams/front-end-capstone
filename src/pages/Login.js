@@ -52,7 +52,7 @@ const Login = ({ userCallback }) => {
         {Object.keys(user).length !== 0 && (
           <button
             onClick={(e) => handleSignOut(e)}
-            className="bg-emerald-900 hover:bg-teal-600 text-white py-2 px-4 rounded"
+            className="bg-emerald-900 hover:bg-emerald-700 text-white py-2 px-4 rounded"
           >
             Logout
           </button>
