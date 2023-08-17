@@ -2,29 +2,32 @@ import React from "react";
 import { useState } from "react";
 import List from "./List";
 
+const AllLists = ({ list, setListData }) => {
+  const [isVisible, setIsVisible] = useState(false);
 
-const AllLists = ({ lists }) => {
+  const handleSetIsVisible = (boolean) => {
+    setIsVisible(boolean);
+  };
 
-    const [selectedList, setSelectedList] = useState(null);
+  return (
+    <div>
+      <h4>
+        <button
+          disabled={list && list.length === 0}
+          onClick={() => handleSetIsVisible(!isVisible)}
+          className={
+            list && list.length
+              ? "hover:cursor-pointer"
+              : "hover:cursor-not-allowed"
+          }
+        >
+          Favorites
+        </button>
+      </h4>
 
-    const handleListClick = (list) => {
-        setSelectedList(list);
-    };
-
-
-    return (
-        <div>
-            <ul>
-                {lists.map((list) => (
-                    <li key={list.listId}>
-                        <button onClick={() => handleListClick(list)}>{list.name}</button>
-                    </li>
-                ))}
-            </ul>
-            {selectedList && <List list={selectedList} />}
-        </div>
-    );
+      {isVisible && <List list={list} setListData={setListData} />}
+    </div>
+  );
 };
 
 export default AllLists;
-

@@ -1,87 +1,82 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import RestaurantCard from "./RestaurantCard";
-import PropTypes from "prop-types";
 
-const List = ({ list }) => {
+const List = ({ list, setListData }) => {
+  const [randomRestaurant, setRandomRestaurant] = useState(null);
 
-    const [restaurants, setRestaurants] = useState([]);
+  const getRandomRestaurant = () => {
+    const randomIndex = Math.floor(Math.random() * list.length);
+    const selectedRandomRestaurant = list[randomIndex];
+    setRandomRestaurant(selectedRandomRestaurant);
+  };
 
-    const [randomRestaurant, setRandomRestaurant] = useState(null);
+  const deleteRestaurant = (restaurantId) => {
+    fetch(
+      `https://jakd-backend-capstone.onrender.com/dashboard/list/42bef239-dc7/${restaurantId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => {
+        setListData(list.filter((element) => element.yelpId != restaurantId));
 
-    const getRandomRestaurant = () => {
-        const randomIndex = Math.floor(Math.random() * restaurants.length);
-        const selectedRandomRestaurant = restaurants[randomIndex];
-        setRandomRestaurant(selectedRandomRestaurant);
-    };
+        if (!response.ok) {
+          throw new Error("Network response was not okay");
+        }
+        return response.text();
+      })
+      .catch((error) => console.log(error));
+  };
 
-
-    const fetchRestaurants = async () => {
-        try {
-            const response = await fetch(`https://jakd-backend-capstone.onrender.com/dashboard/list/${list.listId}`);
-            if (!response.ok) {
-                throw new Error("Network response was not okay");
-            }
-            const data = await response.json();
-
-            setRestaurants(data);
-            } catch (error) {
-            console.error("Error fetching restaurants:", error);
-            }
-    };
-
-    useEffect(() => {
-        fetchRestaurants();
-    }, [list]);
-
-
-    const deleteRestaurant = (restaurantId) => {
-
-        fetch(`https://jakd-backend-capstone.onrender.com/dashboard/list/${list.listId}/${restaurantId}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Network response was not okay");
-            }
-
-            fetchRestaurants();
-            return response.text();
-        })
-        .catch((error) => 
-            console.log(error))
-    
-    };
-
-    return (
-        <div> 
-            <h2>List Details:</h2>
-            <button onClick={getRandomRestaurant}>Can't choose? Click here!</button>
-            <ul> 
-                {restaurants.map((restaurant) => (
-                    <RestaurantCard key={restaurant.id} restaurant={restaurant} deleteRestaurant={deleteRestaurant}
-                    isRandom={false}/>
-            ))}
-            </ul>
-            {randomRestaurant && (
-                <div className="selected-restaurant">
-                    <h2>Try here:</h2>
-                    <RestaurantCard restaurant={randomRestaurant} isRandom={true} />
-                </div>
-            )}
+  return (
+    <div className="flex flex-col items-center">
+      <div className="w-full flex justify-center">
+        {" "}
+        {/* Center the button */}
+        <button
+          className="bg-emerald-900 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded"
+          onClick={getRandomRestaurant}
+        >
+          Can't choose? Click here!
+        </button>
+        <div className="w-full flex justify-center">
+          {" "}
+          {/* Center the "Try here" container */}
+          {randomRestaurant && (
+            <div className="selected-restaurant">
+              <h2>Try here:</h2>
+              <RestaurantCard restaurant={randomRestaurant} isRandom={true} />
+            </div>
+          )}
         </div>
-    );
-
-};
-
-List.propTypes = {
-    list: PropTypes.shape({
-        listId: PropTypes.string.isRequired
-    }).isRequired,
+      </div>
+      <div className="p-4 bg-white m-4 rounded ">
+        <ul className="grid grid-cols-5 gap-4 p-4 justify-content: start;">
+          {list &&
+            list.length > 0 &&
+            list.map((restaurant) => {
+              return (
+                <li key={restaurant.id} className="flex justify-center">
+                  <div className="restaurant-card-container bg-white border rounded p-4 justify-items:center text-Ralway-thin100">
+                    {" "}
+                    {/* Container for each RestaurantCard */}
+                    <RestaurantCard
+                      restaurant={restaurant}
+                      deleteRestaurant={deleteRestaurant}
+                      isRandom={false}
+                    />
+                  </div>
+                </li>
+              );
+            })}
+        </ul>
+      </div>
+    </div>
+  );
 };
 
 export default List;
-

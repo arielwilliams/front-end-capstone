@@ -1,12 +1,18 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import HeartButton from "../components/HeartButton";
 
-const Search = () => {
+const Search = ({ list, setListData }) => {
   // don't delete: can be used for further development features
   // const [userLocation, setUserLocation] = useState({});
   const [searchResults, setSearchResults] = useState([]);
-  // on page load, user's favorite's list becomes accessible to reference
-  const [favoritesList, setFavoritesList] = useState([]);
+
+  // What I've done, git commit:
+  // Declared props in Search.js. In App.js, passed in list and setListData as props into the Search component.
+
+  // check if the object from yelp already exists inside of the favorites list
+  // if it's in the favorites list, the heart should be filled in on search
+  // if it's not in the favorites list, the heart should by empty on search
 
   const yelpUrl = {
     proxy: "https://cors-anywhere.herokuapp.com/",
@@ -18,34 +24,35 @@ const Search = () => {
 
   // function checks if restaurantName is in favorites list already
   const checkIfRestaurantInFavorites = (yelpId) => {
-    return favoritesList.filter((element) => element.yelpId === yelpId);
+    return searchResults.find(
+      (element) => element.id === list.find((item) => item.id)
+    );
   };
 
-  // don't delete: gets user's current location when the webpage loads (can be used for further development features)
-  // On page load of Search, the useEffect triggers and calls getFavoritesList which then makes a GET request to BE for favorites list
-  useEffect(() => {
-    // getUserLocation();
-    getFavoritesList();
-  }, []);
+  // // don't delete: gets user's current location when the webpage loads (can be used for further development features)
+  // // On page load of Search, the useEffect triggers and calls getFavoritesList which then makes a GET request to BE for favorites list
+  // useEffect(() => {
+  // getUserLocation();
+  // }, []);
 
-  // getFavorites list makes GET request to BE for favorites list
-  const getFavoritesList = async () => {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-      },
-    };
+  // // getFavorites list makes GET request to BE for favorites list
+  // const getFavoritesList = async () => {
+  //   const options = {
+  //     method: "GET",
+  //     headers: {
+  //       accept: "application/json",
+  //     },
+  //   };
 
-    const favoritesListUrl = `${yelpUrl.favorites}`;
+  //   const favoritesListUrl = `${yelpUrl.favorites}`;
 
-    await fetch(favoritesListUrl, options)
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        setFavoritesList(response);
-      });
-  };
+  //   await fetch(favoritesListUrl, options)
+  //     .then((response) => response.json())
+  //     .then((response) => {
+  //       console.log(response);
+  //       setFavoritesList(response);
+  //     });
+  // };
 
   // don't delete: can be used for further development features
   // const getUserLocation = () => {
@@ -69,40 +76,11 @@ const Search = () => {
 
   const handleSearchFormSubmit = (event) => {
     event.preventDefault();
-    console.log(event);
     getSearchResults(event);
   };
 
   const sanitizeInput = (input) => {
     return input.toLowerCase().trim();
-  };
-
-  const handleClickAddToFavoriteList = async (searchResult) => {
-    await postDataToFavList(searchResult);
-    await getFavoritesList();
-  };
-
-  const postDataToFavList = async (searchResult) => {
-    console.log("Data to be sent: ", searchResult);
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(searchResult),
-    };
-
-    try {
-      const response = await fetch(yelpUrl.backend + "/save-favorite", options);
-      if (response.ok) {
-        console.log("Restaurant saved to favorites");
-      } else {
-        console.error("Failed to save restaurant to favorites");
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
   };
 
   // getSearchResults makes GET request to BE to grab response from yelp API
@@ -210,19 +188,11 @@ const Search = () => {
                       </li>
                     </ul>
                   </address>
-                  {checkIfRestaurantInFavorites(searchResult.id).length ===
-                  0 ? (
-                    <button
-                      type="button"
-                      onClick={() => handleClickAddToFavoriteList(searchResult)}
-                    >
-                      ♡
-                    </button>
-                  ) : (
-                    <button type="button" disabled={true}>
-                      ♥️
-                    </button>
-                  )}
+                  <HeartButton
+                    list={list}
+                    searchResult={searchResult}
+                    setListData={setListData}
+                  />
                 </section>
               );
             })}

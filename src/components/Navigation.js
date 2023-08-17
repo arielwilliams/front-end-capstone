@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navigation = (props) => {
-  if (Object.keys(props.user).length > 0) {
+  const loggedIn = Object.keys(props.user).length > 0;
+
+  if(loggedIn) {
     return (
       <>
         <nav className="flex justify-between bg-emerald-900 p-4">
@@ -11,6 +13,12 @@ const Navigation = (props) => {
             className="text-white hover:bg-emerald-700 px-4 py-2 rounded"
           >
             Home
+          </Link>
+          <Link
+            to="/about"
+            className="text-white hover:bg-blue-700 px-4 py-2 rounded"
+          >
+            About
           </Link>
           <Link
             to="/dashboard"
@@ -24,29 +32,30 @@ const Navigation = (props) => {
           >
             Search
           </Link>
-          {/* <Link
-            to="/logout"
-            className="text-white hover:bg-blue-700 px-4 py-2 rounded"
-          >
-            Logout
-          </Link> */}
         </nav>
       </>
     );
   } else {
     return (
-      <>
-        <nav className="flex justify-between bg-blue-500 p-4">
+      <nav className="flex justify-between bg-blue-500 p-4">
+        <div className="flex">
           <Link
             to="/home"
             className="text-white hover:bg-blue-700 px-4 py-2 rounded"
           >
             Home
           </Link>
-        </nav>
-      </>
+          <Link
+            to="/about"
+            className="text-white hover:bg-blue-700 px-4 py-2 rounded"
+          >
+            About
+          </Link>
+        </div>
+      </nav>
     );
   }
 };
 
 export default Navigation;
+
