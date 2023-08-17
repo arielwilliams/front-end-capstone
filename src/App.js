@@ -65,7 +65,10 @@ function App() {
                 }
               />
               <Route path="/list/:listId" element={<List />} />
-              <Route path="/search" element={<Search />} />
+              <Route
+                path="/search"
+                element={<Search list={listData} setListData={setListData} />}
+              />
             </Routes>
           </main>
         </div>

@@ -12,7 +12,15 @@ const AllLists = ({ list, setListData }) => {
   return (
     <div>
       <h4>
-        <button onClick={() => handleSetIsVisible(!isVisible)}>
+        <button
+          disabled={list && list.length === 0}
+          onClick={() => handleSetIsVisible(!isVisible)}
+          className={
+            list && list.length
+              ? "hover:cursor-pointer"
+              : "hover:cursor-not-allowed"
+          }
+        >
           Favorites
         </button>
       </h4>
