@@ -38,7 +38,7 @@ const List = ({ list, setListData }) => {
     <div className="flex flex-col items-center">
       {/* <h2>List Details:</h2> */}
       <div className="w-full flex justify-center"> {/* Center the button */}
-        <button className="bg-emerald-900 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded" onClick={getRandomRestaurant}>
+        <button className="bg-emerald-900 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded" onClick={getRandomRestaurant}>
           Can't choose? Click here!
         </button>
       </div>
@@ -55,7 +55,7 @@ const List = ({ list, setListData }) => {
     <ul className="grid grid-cols-5 gap-4 p-4 justify-content: start;"> {/* Add space between each list item */}
       {list.map((restaurant) => (
         <li key={restaurant.id} className="flex justify-center">
-          <div className="restaurant-card-container bg-white border rounded p-4 justify-items:center"> {/* Container for each RestaurantCard */}
+          <div className="restaurant-card-container bg-white border rounded p-4 justify-items:center text-Ralway-thin100"> {/* Container for each RestaurantCard */}
             <RestaurantCard
               restaurant={restaurant}
               deleteRestaurant={deleteRestaurant}
