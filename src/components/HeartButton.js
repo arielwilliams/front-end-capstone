@@ -4,7 +4,7 @@ function HeartButton({ list, searchResult, setListData }) {
   // Check to see if favorite list element has the searchResult.id
   // We force with !! to be type of boolean
   const [isDisabled, setIsDisabled] = useState(
-    !!list.find((element) => element.yelpId === searchResult.id)
+    !!list.find((element) => element.id === searchResult.id)
   );
 
   const saveFavoriteUrl =

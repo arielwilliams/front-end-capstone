@@ -22,7 +22,7 @@ const List = ({ list, setListData }) => {
       }
     )
       .then((response) => {
-        setListData(list.filter((element) => element.yelpId != restaurantId));
+        setListData(list.filter((element) => element.id != restaurantId));
 
         if (!response.ok) {
           throw new Error("Network response was not okay");
