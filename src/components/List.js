@@ -13,7 +13,7 @@ const List = ({ list, setListData }) => {
 
   const deleteRestaurant = (restaurantId) => {
     fetch(
-      `https://jakd-backend-capstone.onrender.com/dashboard/list/${list[0].listId}/${restaurantId}`,
+      `https://jakd-backend-capstone.onrender.com/dashboard/list/42bef239-dc7/${restaurantId}`,
       {
         method: "DELETE",
         headers: {
@@ -22,9 +22,7 @@ const List = ({ list, setListData }) => {
       }
     )
       .then((response) => {
-        setListData(
-          list.filter((element) => element.restaurantId != restaurantId)
-        );
+        setListData(list.filter((element) => element.yelpId != restaurantId));
 
         if (!response.ok) {
           throw new Error("Network response was not okay");
@@ -39,14 +37,19 @@ const List = ({ list, setListData }) => {
       <h2>List Details:</h2>
       <button onClick={getRandomRestaurant}>Can't choose? Click here!</button>
       <ul>
-        {list.map((restaurant) => (
-          <RestaurantCard
-            key={restaurant.id}
-            restaurant={restaurant}
-            deleteRestaurant={deleteRestaurant}
-            isRandom={false}
-          />
-        ))}
+        {list &&
+          list.length > 0 &&
+          list.map((restaurant) => {
+            return (
+              <li key={restaurant.id}>
+                <RestaurantCard
+                  restaurant={restaurant}
+                  deleteRestaurant={deleteRestaurant}
+                  isRandom={false}
+                />
+              </li>
+            );
+          })}
       </ul>
       {randomRestaurant && (
         <div className="selected-restaurant">

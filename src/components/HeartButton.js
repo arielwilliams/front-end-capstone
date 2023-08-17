@@ -28,11 +28,9 @@ function HeartButton({ list, searchResult, setListData }) {
     try {
       const response = await fetch(saveFavoriteUrl, options);
       if (response.ok) {
-        setListData(list.concat(searchResult));
+        setListData([...list, searchResult]);
         setIsDisabled(true);
         console.log("Restaurant saved to favorites");
-      } else {
-        console.error("Failed to save restaurant to favorites");
       }
     } catch (error) {
       console.error("An error occurred:", error);
