@@ -33,30 +33,48 @@ const List = ({ list, setListData }) => {
   };
 
   return (
-    <div>
-      <h2>List Details:</h2>
-      <button onClick={getRandomRestaurant}>Can't choose? Click here!</button>
-      <ul>
-        {list &&
-          list.length > 0 &&
-          list.map((restaurant) => {
-            return (
-              <li key={restaurant.id}>
-                <RestaurantCard
-                  restaurant={restaurant}
-                  deleteRestaurant={deleteRestaurant}
-                  isRandom={false}
-                />
-              </li>
-            );
-          })}
-      </ul>
-      {randomRestaurant && (
-        <div className="selected-restaurant">
-          <h2>Try here:</h2>
-          <RestaurantCard restaurant={randomRestaurant} isRandom={true} />
+    <div className="flex flex-col items-center">
+      <div className="w-full flex justify-center">
+        {" "}
+        {/* Center the button */}
+        <button
+          className="bg-emerald-900 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded"
+          onClick={getRandomRestaurant}
+        >
+          Can't choose? Click here!
+        </button>
+        <div className="w-full flex justify-center">
+          {" "}
+          {/* Center the "Try here" container */}
+          {randomRestaurant && (
+            <div className="selected-restaurant">
+              <h2>Try here:</h2>
+              <RestaurantCard restaurant={randomRestaurant} isRandom={true} />
+            </div>
+          )}
         </div>
-      )}
+      </div>
+      <div className="p-4 bg-white m-4 rounded ">
+        <ul className="grid grid-cols-5 gap-4 p-4 justify-content: start;">
+          {list &&
+            list.length > 0 &&
+            list.map((restaurant) => {
+              return (
+                <li key={restaurant.id} className="flex justify-center">
+                  <div className="restaurant-card-container bg-white border rounded p-4 justify-items:center text-Ralway-thin100">
+                    {" "}
+                    {/* Container for each RestaurantCard */}
+                    <RestaurantCard
+                      restaurant={restaurant}
+                      deleteRestaurant={deleteRestaurant}
+                      isRandom={false}
+                    />
+                  </div>
+                </li>
+              );
+            })}
+        </ul>
+      </div>
     </div>
   );
 };

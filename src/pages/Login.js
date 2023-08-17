@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
-
 const Login = ({ userCallback }) => {
   const [user, setUser] = useState({});
-  const [userChecked, setUserChecked] = useState(false);
 
   const navigate = useNavigate();
 
@@ -33,70 +31,43 @@ const Login = ({ userCallback }) => {
       callback: handleCallbackResponse,
     });
 
-    google.accounts.id.renderButton(document.getElementById("signInDiv"), {
-      theme: "outline",
-      size: "large",
-    });
-  }, []);
+    if (typeof google !== "undefined" && google.accounts) {
+      google.accounts.id.initialize({
+        client_id:
+          "865937179776-r5timpp1f57epgi3q06blrv8ftvu5qev.apps.googleusercontent.com",
+        callback: handleCallbackResponse,
+      });
 
-  useEffect(() => {
-    if (Object.keys(user).length !== 0 && !userChecked) {
-      setUserChecked(true);
-
-      fetch(`https://jakd-backend-capstone.onrender.com/dashboard/user/users`)
-        .then((response) => response.json())
-        .then((data) => {
-          try {
-            const userId = user.sub; 
-            const userExists = data.some((user) => user.subId === userId);
-
-            if (userExists) {
-              console.log("User exists");
-            } else {
-              fetch(`https://jakd-backend-capstone.onrender.com/dashboard/user/save-user`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  subId: userId,
-                  givenName: user.given_name,
-                  email: user.email,
-                  name: user.name,
-                  picture: user.picture,
-                }),
-              })
-                .then((response) => response.json())
-                .then((result) => {
-                  console.log("User saved successfully:", result);
-                })
-                .catch((error) => {
-                  console.log("Error saving user:", error);
-                });
-            }
-          } catch (error) {
-            console.log("Error processing user data:", error);
-          }
-        })
-        .catch((error) => {
-          console.log("Error fetching data:", error);
-        });
+      google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+        theme: "outline",
+        size: "large",
+      });
     }
-  }, [user, userChecked]);
+  }, []);
 
   return (
     <div className="App">
-      <div id="signInDiv"></div>
+      <div id="signInDiv" className={`flex justify-start items-center mb-4 ${Object.keys(user).length !== 0 ? 'hidden' : ''}`}></div>
+      <>
+        {Object.keys(user).length !== 0 && (
+          <button
+            onClick={(e) => handleSignOut(e)}
+            className="bg-emerald-900 hover:bg-teal-600 text-white py-2 px-4 rounded"
+          >
+            Logout
+          </button>
+        )}
+      </>
+
       {Object.keys(user).length !== 0 && (
-        <>
-          <button onClick={(e) => handleSignOut(e)}>Logout</button>
-          <div className="font-bold">
-            <h3>Hello, {user.name}!</h3>
-          </div>
-        </>
-      )}
-    </div>
+        <div className="font-bold text-emerald-900 mt-4">
+          <h2>Hello, {user.name}!</h2>
+        </div>
+    )}
+  </div>
+
   );
+
 };
 
 export default Login;

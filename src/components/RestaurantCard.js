@@ -15,7 +15,10 @@ const RestaurantCard = ({ restaurant, deleteRestaurant, isRandom }) => {
         Address: {restaurant.location.display_address.join(", ")}
       </address>
       {isRandom ? null : (
-        <button onClick={() => onDeleteClick(restaurant.yelpId)}>
+        <button
+          className="bg-white hover:bg-blue-600 text-black font-semibold py-2 px-4 border rounded p-4  w-full border-black"
+          onClick={() => onDeleteClick(restaurant.yelpId)}
+        >
           Delete Restaurant
         </button>
       )}
