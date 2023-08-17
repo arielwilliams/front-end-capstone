@@ -121,71 +121,84 @@ const Search = ({ list, setListData }) => {
   };
 
   return (
-    <>
-      <h1 className="text-center font-semibold text-5xl m-6">
-        Welcome to the Search Page
-      </h1>
-      <h2 className="font-semibold mt-6 mb-4">
-        Please enter a restaurant name and location into the search fields
-        below.
-      </h2>
-      <form
-        onSubmit={(event) => handleSearchFormSubmit(event)}
-        className="space-y-4"
-      >
-        <div className="flex space-x-4">
-          <input
-            placeholder="Enter restaurant name..."
-            className="flex-grow bg-blue-200 rounded-lg py-4 px-6 text-2xl focus:outline-none focus:ring focus:border-blue-300"
-            type="search"
-            required
-          />
-          <input
-            placeholder="Enter location..."
-            className="flex-grow bg-blue-200 rounded-lg py-4 px-6 text-2xl focus:outline-none focus:ring focus:border-blue-300"
-            type="search"
-            required
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white font-bold py-4 px-6 rounded ml-2"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
-      {searchResults.length > 0 &&
-        searchResults.map((searchResult, index) => {
-          return (
-            <section className="pb-4" key={searchResult.id}>
-              <h3 className="text-lg">{searchResult.name}</h3>
-              <a href={"tel:" + searchResult.phone}>
-                {searchResult.display_phone}
-              </a>
-              <p>{searchResult.categories[0].title}</p>
+    <section className="relative bg-[url(~/public/sushi-background.jpeg)] bg-cover min-h-[100vh] py-4 after:content-[''] after:absolute after:w-full after:h-full after:top-0 after:left-0 after:bg-stone-200 after:opacity-[.75]">
+      <section className="z-10 relative">
+        <h1 className="text-center font-semibold text-5xl m-6">
+          Welcome to the Search Page
+        </h1>
+        <h2 className="font-semibold mt-7 mb-4 text-center mx-auto max-w-[475px]">
+          Please enter a restaurant name and location into the search fields
+          below.
+        </h2>
+        <form onSubmit={(event) => handleSearchFormSubmit(event)} className="">
+          <div className="mt-4 rounded border bg-white p-6 flex flex-col max-w-[475px] justify-center flex-center mx-auto">
+            <input
+              placeholder="Enter restaurant name"
+              className="mb-4 flex-grow bg-white-200 border rounded-lg py-4 px-4 text-2xl focus:outline-none focus:ring focus:border-blue-300"
+              type="search"
+              required
+            />
+            <input
+              placeholder="Enter location"
+              className="mb-4 ml-0 flex-grow bg-white-200 border rounded-lg py-4 px-4 text-2xl focus:outline-none focus:ring focus:border-blue-300"
+              type="search"
+              required
+            />
+            <button
+              type="submit"
+              className="bg-emerald-900	bg-blue-500 text-white font-bold py-4 px-6 rounded ml-2"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+        <section className="mt-4 flex flex-wrap justify-center">
+          {searchResults.length > 0 &&
+            searchResults.map((searchResult) => {
+              return (
+                <section
+                  className="p-4 bg-white m-4 rounded"
+                  key={searchResult.id}
+                >
+                  <h3 className="text-xl pb-2">
+                    <a className="underline" href={searchResult.url}>
+                      {searchResult.name}
+                    </a>
+                  </h3>
+                  <a
+                    className="text-blue-600 pb-2"
+                    href={"tel:" + searchResult.phone}
+                  >
+                    {searchResult.display_phone}
+                  </a>
+                  <p className="pb-2 italic">
+                    {searchResult.categories[0].title}
+                  </p>
 
-              <address>
-                <ul>
-                  <li>{searchResult.location.address1}</li>
-                  {searchResult.location.address2 !== "" && (
-                    <li>{searchResult.location.address2}</li>
-                  )}
-                  <li>
-                    <span>{searchResult.location.city} </span>
-                    {searchResult.location.state},{" "}
-                    {searchResult.location.zip_code}
-                  </li>
-                </ul>
-              </address>
-              <HeartButton
-                list={list}
-                searchResult={searchResult}
-                setListData={setListData}
-              />
-            </section>
-          );
-        })}
-    </>
+                  <address className="pb-2">
+                    <ul>
+                      <li>{searchResult.location.address1}</li>
+                      {searchResult.location.address2 !== "" && (
+                        <li>{searchResult.location.address2}</li>
+                      )}
+                      <li>
+                        <span>{searchResult.location.city} </span>
+                        {searchResult.location.state},{" "}
+                        {searchResult.location.zip_code}
+                      </li>
+                    </ul>
+                  </address>
+                  <HeartButton
+                    list={list}
+                    searchResult={searchResult}
+                    setListData={setListData}
+                  />
+                </section>
+              );
+            })}
+        </section>
+      </section>
+    </section>
   );
 };
 

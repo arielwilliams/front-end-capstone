@@ -2,6 +2,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+html {
+  font-family: "Raleway", sans-serif;
+}
+
 /* .App {
   text-align: center;
 }
