@@ -17,7 +17,7 @@ const RestaurantCard = ({ restaurant, deleteRestaurant, isRandom }) => {
       {isRandom ? null : (
         <button
           className="bg-white hover:bg-blue-600 text-black font-semibold py-2 px-4 border rounded p-4  w-full border-black"
-          onClick={() => onDeleteClick(restaurant.yelpId)}
+          onClick={() => onDeleteClick(restaurant.id)}
         >
           Delete Restaurant
         </button>
