@@ -18,7 +18,8 @@ const RestaurantCard = ({restaurant, deleteRestaurant, isRandom}) => {
             <p>Phone: {restaurant.phoneNumber}</p>
             <p>Price Range: {restaurant.pricePoint}</p>
             <p>Address: {restaurant.address}</p>
-            {isRandom ? null: <button onClick={onDeleteClick}>Delete Restaurant</button>}
+            {isRandom ? null:<button className="bg-white hover:bg-blue-600 text-black font-semibold py-2 px-4 border rounded p-4  w-full border-black" onClick={onDeleteClick}>Delete</button>}
+        
         </div>
     );
 };
