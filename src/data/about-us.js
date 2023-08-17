@@ -3,7 +3,7 @@ const aboutUsData = [
     id: 1,
     name: "Ariel Williams",
     blurb:
-      "Welcome to Eatery Ease, where the intersection of passion for exploring new restaurants and organization comes together. This website embodies the culmination of my journey and those of my teammates at Ada Developers Academy, representing our capstone project. When it comes to the culinary realm, nothing beats indulging in an omakase sushi dinner. In Seattle, my favorite restaurant to dine at is Sushi Kashiba. For a more detailed look into my professional endeavors, feel free to connect with me on LinkedIn and explore my projects on GitHub. Thank you for being a part of my journey and exploring Eatery Ease",
+      "Eatery Ease embodies the culmination of my journey and those of my teammates at Ada Developers Academy, representing our capstone project. When it comes to the culinary realm, nothing beats indulging in an omakase sushi dinner. In Seattle, my favorite restaurant to dine at is Sushi Kashiba. For a more detailed look into my professional endeavors, feel free to connect with me on LinkedIn and explore my projects on GitHub.",
     github: "https://github.com/arielwilliams",
     linkedin: "https://linkedin.com/in/ariel-w-827228ab",
     image: "/ariel.jpg",
