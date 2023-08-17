@@ -24,10 +24,11 @@ const Login = ({ userCallback }) => {
     navigate("/home");
   };
 
-   /* global google */
+  /* global google */
   useEffect(() => {
     google.accounts.id.initialize({
-      client_id: "865937179776-r5timpp1f57epgi3q06blrv8ftvu5qev.apps.googleusercontent.com",
+      client_id:
+        "865937179776-r5timpp1f57epgi3q06blrv8ftvu5qev.apps.googleusercontent.com",
       callback: handleCallbackResponse,
     });
 
@@ -47,7 +48,12 @@ const Login = ({ userCallback }) => {
 
   return (
     <div className="App">
-      <div id="signInDiv" className={`flex justify-start items-center mb-4 ${Object.keys(user).length !== 0 ? 'hidden' : ''}`}></div>
+      <div
+        id="signInDiv"
+        className={`flex justify-start items-center mb-4 ${
+          Object.keys(user).length !== 0 ? "hidden" : ""
+        }`}
+      ></div>
       <>
         {Object.keys(user).length !== 0 && (
           <button
@@ -61,14 +67,11 @@ const Login = ({ userCallback }) => {
 
       {Object.keys(user).length !== 0 && (
         <div className="font-bold text-emerald-900 mt-4">
-          <h2>Hello, {user.name}!</h2>
+          <h2 class="pl-1">Hello, {user.given_name}!</h2>
         </div>
-    )}
-  </div>
-
+      )}
+    </div>
   );
-
 };
 
 export default Login;
-

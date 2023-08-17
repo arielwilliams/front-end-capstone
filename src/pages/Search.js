@@ -123,10 +123,10 @@ const Search = ({ list, setListData }) => {
   return (
     <section className="relative bg-[url(~/public/sushi-background.jpeg)] bg-cover min-h-[100vh] py-4 after:content-[''] after:absolute after:w-full after:h-full after:top-0 after:left-0 after:bg-stone-200 after:opacity-[.75]">
       <section className="z-10 relative">
-        <h1 className="text-center font-semibold text-5xl m-6">
-          Welcome to the Search Page
+        <h1 className="text-emerald-900 text-center font-semibold text-5xl m-6">
+          Welcome to Search Page
         </h1>
-        <h2 className="font-semibold mt-7 mb-4 text-center mx-auto max-w-[475px]">
+        <h2 className="text-emerald-900 font-semibold mt-7 mb-4 text-center mx-auto max-w-[475px]">
           Please enter a restaurant name and location into the search fields
           below.
         </h2>
