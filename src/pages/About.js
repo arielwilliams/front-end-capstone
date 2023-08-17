@@ -78,7 +78,7 @@ return (
     </h1>
     <div className="grid grid-cols-1 gap-4">
         {aboutUsData.map((element) => (
-        <div key={element.id} className="border p-4 rounded shadow bg-white bg-opacity-90">
+        <div key={element.id} className="border p-4 rounded shadow bg-white bg-opacity-100">
             {element.image && (
             <img
                 src={element.image}
@@ -89,7 +89,7 @@ return (
             <h2 className="text-xl font-semibold text-emerald-900">
             {element.name}
             </h2>
-            <p className="text-emerald-900">{element.blurb}</p>
+            <p className="text-emerald-950">{element.blurb}</p>
             {element.github || element.linkedin ? (
             <p>
                 {element.github && (
