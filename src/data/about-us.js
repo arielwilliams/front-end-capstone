@@ -20,7 +20,7 @@ const aboutUsData = [
   {
     id: 3,
     name: "Janice Nguyen",
-    blurb: "Boba enthusiast",
+    blurb: "Our team of food and tech enthusiasts came together to create a platform that takes the guesswork out of choosing where to eat and keep your favorites restaurants in one place. With a love for great food and eating out with friends, we've designed a website that streamlines the decision making process and turned it into an enjoyable experience. This project is a culmination of our full stack learning journey at Ada Developers Academy.",
     github: "https://github.com/janice15",
     image: "/janice_photo.jpg",
   },
