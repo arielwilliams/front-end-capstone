@@ -21,6 +21,7 @@ const aboutUsData = [
     name: "Janice Nguyen",
     blurb: "Boba enthusiast",
     github: "https://github.com/janice15",
+    image: "/janice_photo.jpg",
   },
   {
     id: 4,
@@ -28,6 +29,7 @@ const aboutUsData = [
     blurb:
       "Foodies unite! Our collective passion for food and sharing the best eats led us to create this platform for all food lovers to enjoy. P.S. If you’re ever in the Seattle Chinatown-International District, be sure to try out my favorite combo at Hood Famous Cafe + Bar: an iced ube latte and slice of ube cheesecake!",
     linkedin: "https://www.linkedin.com/in/kathleen-shin/",
+    image: "/kathleen_photo.jpg",
   },
 ];
 
